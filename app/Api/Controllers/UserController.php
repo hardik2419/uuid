@@ -16,6 +16,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Notifications\UserRegister;
 use App\Notifications\ForgetPassowrdNotification;
 use App\Notifications\UserNotification;
+use App\Http\Resources\UserResource;
 use Config;
 
 /**
@@ -38,11 +39,8 @@ class UserController extends Controller
             if (!$user) {
                 throw new \Exception("Sorry Please verify your email address.", 400);
             }
-
-            return response()->json([
-                'code' => '200',
-                'user' => $user,
-                'token' => compact('token'),
+            return (new UserResource($user))->additional([
+                'token' => $token
             ]);
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
@@ -69,11 +67,9 @@ class UserController extends Controller
             $user['link'] = Config::get('app.url') . '/verify/'.$user->email.'/'.$user->remember_token;
             $user->notify(new UserRegister($user));
 
-            return response()->json([
-                'code' => '200',
+            return (new UserResource($user))->additional([
                 'success' => true,
                 'message' => 'Register Successfully.Please check your to verify email address.',
-                'user' => $user,
             ]);
         }
     }
@@ -145,17 +141,7 @@ class UserController extends Controller
 
     public function getAuthenticatedUser(Request $request)
     {
-        try {
-            if (!$user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-        } catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-            return response()->json(['token_expired'], $e->getStatusCode());
-        } catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
-            return response()->json(['token_invalid'], $e->getStatusCode());
-        } catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
-            return response()->json(['token_absent'], $e->getStatusCode());
-        }
-        return response()->json(compact('user'));
+        return new UserResource($user);
+        //return response()->json(compact('user'));
     }
 }

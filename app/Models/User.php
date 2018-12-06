@@ -48,6 +48,10 @@ class User extends Authenticatable implements JWTSubject
     }
     public function getCompanies()
     {
-        return $this->hasOne(Company::class, 'user_id', 'uuid');
+        return $this->hasOne(Company::class, 'user_id', 'id');
+    }
+    public function socialAccounts()
+    {
+        return $this->hasOne(SocialAccount::class, 'user_id', 'id');
     }
 }

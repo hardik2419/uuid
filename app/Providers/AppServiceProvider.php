@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Services\SocialUserResolver;
+use Hivokas\LaravelPassportSocialGrant\Resolvers\SocialUserResolverInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,4 +28,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    public $bindings = [
+        SocialUserResolverInterface::class => SocialUserResolver::class,
+    ];
 }

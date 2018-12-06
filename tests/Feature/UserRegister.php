@@ -3,23 +3,26 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
-class ExampleTest extends TestCase
+use App\Models\User;
+class UserRegister extends TestCase
 {
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testBasicTest()
+
+    public function testUserRegisterSuccessfully()
     {
-        $response = $this->get('/');
 
-        $response->assertStatus(200);
-        /*$payload = ['email' => 'test@gmail.com', 'password' => 'test@123'];
+        $data = factory(User::class)->make();
+        $data = json_decode(json_encode($data),true);
+        $data['password'] = '123123';
+        $data['password_confirmation'] = '123123';
 
-        $response = $this->json('POST', 'api/login', $payload)
+        return $this->json('POST', 'api/register', $data)
             ->assertStatus(200)
             ->assertJsonStructure([
                 'user' => [
@@ -28,14 +31,12 @@ class ExampleTest extends TestCase
                     'last_name',
                     'email',
                     'phone',
-                    'image',
-                    'is_verified',
-                    'is_profile_completed',
-                    'status',
+                    'link',
                     'created_at',
                     'updated_at',
                 ],
-                'token'
-            ]);*/
+                'message',
+                'success'
+            ]);
     }
 }
