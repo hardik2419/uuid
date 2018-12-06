@@ -7,7 +7,8 @@ const routes: Routes = [
         path: '',
         component: LayoutComponent,
         children: [
-            { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'}
+            { path: '', redirectTo: 'dashboard' },
+            { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule'}
 
         ]
     }
