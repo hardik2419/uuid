@@ -23,4 +23,8 @@ Route::post('set-password', 'UserController@setPassword');
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
+
+    Route::group(['prefix' => 'company'], function () {
+        Route::post('add-update', 'CompanyController@addUpdate');
+    });
 });

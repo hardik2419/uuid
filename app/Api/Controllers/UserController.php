@@ -16,7 +16,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Notifications\UserRegister;
 use App\Notifications\ForgetPassowrdNotification;
 use App\Notifications\UserNotification;
-use App\Http\Resources\UserResource;
+use App\Api\Resources\UserResource;
 use Config;
 
 /**
@@ -32,18 +32,18 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                throw new \Exception("invalid_credentials", 500);
             }
 
-            $user = User::where('email', $credentials['email'])->where('is_verified', '!=', 0)->first();
-            if (!$user) {
+            $user = \Auth::user();
+            if ($user->is_verified == 0) {
                 throw new \Exception("Sorry Please verify your email address.", 400);
             }
             return (new UserResource($user))->additional([
                 'token' => $token
             ]);
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+            throw new \Exception("could not create token", 500);
         }
     }
 
@@ -68,7 +68,7 @@ class UserController extends Controller
             $user->notify(new UserRegister($user));
 
             return (new UserResource($user))->additional([
-                'success' => true,
+                'status_code' => 200,
                 'message' => 'Register Successfully.Please check your to verify email address.',
             ]);
         }
@@ -88,8 +88,7 @@ class UserController extends Controller
             $user->notify(new ForgetPassowrdNotification($user));
 
             return response()->json([
-                'code' => '200',
-                'success' => true,
+                'status_code' => 200,
                 'message' => 'Please check your email address to reset password.',
             ]);
         }
@@ -111,8 +110,7 @@ class UserController extends Controller
             $user->update(['remember_token' => '', 'is_verified' => 1]);
 
             return response()->json([
-                'code' => '200',
-                'success' => true,
+                'code' => 200,
                 'message' => 'Your email id successfully verifies.',
             ]);
         }
@@ -132,8 +130,7 @@ class UserController extends Controller
             $user['meg'] = 'Your password successfully updated.';
             $user->notify(new UserNotification($user));
             return response()->json([
-                'code' => '200',
-                'success' => true,
+                'status_code' => 200,
                 'message' => 'Your password successfully updated.',
             ]);
         }
@@ -141,6 +138,7 @@ class UserController extends Controller
 
     public function getAuthenticatedUser(Request $request)
     {
+        $user = JWTAuth::parseToken()->authenticate();
         return new UserResource($user);
         //return response()->json(compact('user'));
     }
