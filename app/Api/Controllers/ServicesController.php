@@ -2,17 +2,15 @@
 
 namespace App\Api\Controllers;
 
-use App\Api\Requests\CompanyRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Api\Resources\CompanyResource;
-use App\Models\Company;
 
-/**
- * @resource Auth
- */
-class CompanyController extends Controller
+use App\Models\Service;
+use App\Api\Requests\ServicesRequest;
+use App\Api\Resources\ServicesResource;
+
+class ServicesController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -29,18 +27,21 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $request)
+    public function store(ServicesRequest $request)
     {
         try {
-            $insert_data = $request->only(['name','logo','email','phone','tagline','founded_date',
-            'employe_size','admin_email','description','website_url']);
+            $company_id = \Auth::user()->company->id;
+            if (!$company_id) {
+                throw new \Exception('sorry! Company not found', 400);
+            }
+            $insert_data = $request->only(['name','category','sub_category','focus']);
 
-            $insert_data['user_id'] = \Auth::user()->id;
-            $company = Company::create($insert_data);
+            $insert_data['company_id'] = $company_id;
+            $services = Service::create($insert_data);
 
-            return (new CompanyResource($company))->additional([
+            return (new ServicesResource($services))->additional([
                 'status_code' => 200,
-                'message' => 'Comapny Added.',
+                'message' => 'Services Added.',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());

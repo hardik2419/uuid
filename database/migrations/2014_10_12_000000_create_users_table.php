@@ -21,9 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('phone',20)->unique();
             $table->string('image')->nullable();
-            $table->boolean('is_verified')->default(false);
+            $table->timestamp('email_verified_at')->nullable();
             $table->boolean('is_profile_completed')->default(false);
             $table->string('status',15)->default('pending');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
             $table->primary('id');

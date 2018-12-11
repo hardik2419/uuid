@@ -26,7 +26,7 @@ class AddCompanyFieldTable extends Migration
     public function down()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->string('website_url')->unique();
+            $table->dropColumn('website_url');
         });
     }
 }

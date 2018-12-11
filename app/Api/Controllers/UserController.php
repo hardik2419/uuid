@@ -9,6 +9,7 @@ use App\Api\Requests\SetPasswordRequest;
 use App\Api\Requests\VerifyEmailRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use JWTAuth;
@@ -32,18 +33,21 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                throw new \Exception("invalid_credentials", 500);
+                throw new \Exception("Invaild creaditional.", 401);
             }
 
             $user = \Auth::user();
-            if ($user->is_verified == 0) {
-                throw new \Exception("Sorry Please verify your email address.", 400);
+            if ($user->email_verified_at == '') {
+                throw new \Exception("Sorry! Please verify your email address.", 400);
             }
             return (new UserResource($user))->additional([
                 'token' => $token
             ]);
-        } catch (JWTException $e) {
-            throw new \Exception("could not create token", 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => $e->getCode(),
+                'message'   => $e->getMessage()
+            ], $e->getCode());
         }
     }
 
@@ -58,13 +62,12 @@ class UserController extends Controller
             'email'         => $request->get('email'),
             'password'      => bcrypt($request->get('password')),
             'phone'         => $request->get('phone'),
-            'remember_token'=> str_random(10),
         ]);
         if (!$user) {
             throw new \Exception("Sorry, please try again later.", 400);
         } else {
             $user->roles()->sync(['3']);
-            $user['link'] = Config::get('app.url') . '/verify/'.$user->email.'/'.$user->remember_token;
+            $user['link'] = url('/verify/'.$user->email);
             $user->notify(new UserRegister($user));
 
             return (new UserResource($user))->additional([
@@ -80,11 +83,18 @@ class UserController extends Controller
     {
         $user = User::where('email', $request->get('email'))->first();
         if (!$user) {
-            throw new \Exception("Sorry, please try again later.", 400);
+            return response()->json([
+                'code' => 400,
+                'message' => 'Sorry, please try again later.',
+            ]);
         } else {
-            $user->update(['remember_token' => str_random(10)]);
+            $token = str_random(10);
+            PasswordReset::create([
+                'email'=> $request->get('email'),
+                'token' => $token
+            ]);
 
-            $user['link'] = Config::get('app.url') . '/set-password/'.$user->email.'/'.$user->remember_token;
+            $user['link'] = url('/set-password/'.$user->email.'/'.$token);
             $user->notify(new ForgetPassowrdNotification($user));
 
             return response()->json([
@@ -100,14 +110,16 @@ class UserController extends Controller
     {
         $user = User::where([
                 'email' => $request->get('email'),
-                'remember_token' => $request->get('token'),
-                'is_verified' => 0
+                'email_verified_at' => null,
         ])->first();
 
         if (!$user) {
-            throw new \Exception("Sorry, please try again later.", 400);
+            return response()->json([
+                'code' => 400,
+                'message' => 'Sorry, email alreday verifie.',
+            ]);
         } else {
-            $user->update(['remember_token' => '', 'is_verified' => 1]);
+            $user->update(['email_verified_at' => date('Y-m-d H:i:s')]);
 
             return response()->json([
                 'code' => 200,
@@ -121,11 +133,21 @@ class UserController extends Controller
      */
     public function setPassword(SetPasswordRequest $request)
     {
-        $user = User::where(['email' => $request->get('email'), 'remember_token' => $request->get('token')])->first();
+        $rest = PasswordReset::where([
+            'email' => $request->get('email'), 'token' => $request->get('token')
+        ])->first();
+
+        if (!$rest) {
+            throw new \Exception("Sorry, please try again later.", 400);
+        }
+
+        $user = User::where(['email' => $request->get('email')])->first();
         if (!$user) {
             throw new \Exception("Sorry, please try again later.", 400);
         } else {
-            $user->update(['remember_token' => '', 'password' => bcrypt($request->get('password'))]);
+            $user->update(['password' => bcrypt($request->get('password'))]);
+            PasswordReset::where('email', $request->get('email'))->delete();
+
             $user['subject'] = 'Reset Password';
             $user['meg'] = 'Your password successfully updated.';
             $user->notify(new UserNotification($user));

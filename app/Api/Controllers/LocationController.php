@@ -2,15 +2,15 @@
 
 namespace App\Api\Controllers;
 
-use App\Api\Requests\CompanyRequest;
+use App\Api\Requests\LocationRequest;
+use App\Api\Resources\LocationResource;
 use App\Http\Controllers\Controller;
-use App\Api\Resources\CompanyResource;
-use App\Models\Company;
+use App\Models\Location;
 
 /**
  * @resource Auth
  */
-class CompanyController extends Controller
+class LocationController extends Controller
 {
 
     /**
@@ -29,18 +29,32 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CompanyRequest $request)
+    public function store(LocationRequest $request)
     {
         try {
-            $insert_data = $request->only(['name','logo','email','phone','tagline','founded_date',
-            'employe_size','admin_email','description','website_url']);
+            $company_id = \Auth::user()->company->id;
+            if (!$company_id) {
+                throw new \Exception('sorry! company not found', 400);
+            }
 
-            $insert_data['user_id'] = \Auth::user()->id;
-            $company = Company::create($insert_data);
+            $insert_data = $request->only([
+                "email",
+                "phone",
+                "longitude",
+                "latitude",
+                "address_1",
+                "address_2",
+                "city",
+                "country",
+                "zip_code",
+                "employee_count",
+            ]);
+            $insert_data['company_id'] = $company_id;
+            $location                  = Location::create($insert_data);
 
-            return (new CompanyResource($company))->additional([
+            return (new LocationResource($location))->additional([
                 'status_code' => 200,
-                'message' => 'Comapny Added.',
+                'message'     => 'Location Added.',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
