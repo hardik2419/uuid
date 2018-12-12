@@ -62,6 +62,7 @@ class UserController extends Controller
             'email'         => $request->get('email'),
             'password'      => bcrypt($request->get('password')),
             'phone'         => $request->get('phone'),
+            'image'         => $request->get('image'),
         ]);
         if (!$user) {
             throw new \Exception("Sorry, please try again later.", 400);
@@ -69,7 +70,6 @@ class UserController extends Controller
             $user->roles()->sync(['3']);
             $user['link'] = url('/verify/'.$user->email);
             $user->notify(new UserRegister($user));
-
             return (new UserResource($user))->additional([
                 'status_code' => 200,
                 'message' => 'Register Successfully.Please check your to verify email address.',

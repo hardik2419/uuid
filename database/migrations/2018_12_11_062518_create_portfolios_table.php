@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAccoladesTable extends Migration
+class CreatePortfoliosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateAccoladesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accolades', function (Blueprint $table) {
+        Schema::create('portfolios', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->string('name');
-            $table->string('years')->nullable();
+            $table->string('title',50);
             $table->string('image')->nullable();
-            $table->longText('description',250)->nullable();
+            $table->string('video')->nullable();
+            $table->longText('description',500)->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateAccoladesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accolades');
+        Schema::dropIfExists('portfolios');
     }
 }

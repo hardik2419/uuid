@@ -18,7 +18,6 @@ class CreateServicesTable extends Migration
             $table->integer('company_id');
             $table->string('name',50)->nullable();
             $table->string('category',50)->nullable();
-            $table->string('sub_category',50)->nullable();
             $table->string('focus',50)->nullable();
             $table->timestamps();
         });

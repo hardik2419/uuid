@@ -2,13 +2,13 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Http\Request;
+use App\Api\Requests\PortfoliosRequest;
+use App\Api\Resources\PortfoliosResource;
 use App\Http\Controllers\Controller;
-use App\Models\Accolade;
-use App\Api\Requests\AccoladesRequest;
-use App\Api\Resources\AccoladesResource;
+use App\Models\Portfolio;
+use Illuminate\Http\Request;
 
-class AccoladesController extends Controller
+class PortfoliosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,21 +26,21 @@ class AccoladesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AccoladesRequest $request)
+    public function store(PortfoliosRequest $request)
     {
         try {
             $company_id = \Auth::user()->company->id;
             if (!$company_id) {
                 throw new \Exception('sorry! Company not found', 400);
             }
-            $insert_data = $request->only(['name','years','description','image']);
+            $insert_data = $request->only(['title', 'image', 'video', 'description']);
 
             $insert_data['company_id'] = $company_id;
-            $accolades = Accolade::create($insert_data);
+            $portfolio                 = Portfolio::create($insert_data);
 
-            return (new AccoladesResource($accolades))->additional([
+            return (new PortfoliosResource($portfolio))->additional([
                 'status_code' => 200,
-                'message' => 'Accolades Added.',
+                'message'     => 'Portfolio Added.',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());

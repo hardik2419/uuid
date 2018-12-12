@@ -19,7 +19,7 @@ class CreateCertificationsTable extends Migration
             $table->string('name');
             $table->string('years')->nullable();
             $table->string('image')->nullable();
-            $table->string('description',250)->nullable();
+            $table->longText('description',250)->nullable();
             $table->timestamps();
         });
     }

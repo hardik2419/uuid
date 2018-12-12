@@ -4,7 +4,7 @@ namespace App\Api\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServicesRequest extends FormRequest
+class PortfoliosRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,9 +14,8 @@ class ServicesRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'     => 'required',
-            'category' => 'required',
-            'focus'    => 'required',
+            'title'       => 'required',
+            'description' => 'required',
         ];
     }
 }

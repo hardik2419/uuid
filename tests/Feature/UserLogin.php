@@ -22,14 +22,14 @@ class UserLogin extends TestCase
         return $this->json('POST', 'api/login', $payload)
             ->assertStatus(200)
             ->assertJsonStructure([
-                'user' => [
+                'data' => [
                     'id',
                     'first_name',
                     'last_name',
                     'email',
                     'phone',
                     'image',
-                    'is_verified',
+                    'email_verified_at',
                     'is_profile_completed',
                     'status',
                     'created_at',

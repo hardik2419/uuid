@@ -34,7 +34,7 @@ class ServicesController extends Controller
             if (!$company_id) {
                 throw new \Exception('sorry! Company not found', 400);
             }
-            $insert_data = $request->only(['name','category','sub_category','focus']);
+            $insert_data = $request->only(['name','category','focus']);
 
             $insert_data['company_id'] = $company_id;
             $services = Service::create($insert_data);

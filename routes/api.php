@@ -37,4 +37,6 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::resource('accolade', 'AccoladesController')->except(['create', 'edit']);
     /* Services API */
     Route::resource('services', 'ServicesController')->except(['create', 'edit']);
+    /* Services API */
+    Route::resource('portfolio', 'PortfoliosController')->except(['create', 'edit']);
 });
