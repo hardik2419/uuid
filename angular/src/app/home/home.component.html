@@ -1,0 +1,88 @@
+<div class="container-fluid homewapper">
+    <div class="row">
+        <app-sidebar></app-sidebar>
+        <div class="left-box col-6">
+            <div class="wapperdiv">
+                <div id="homeslider" class="carousel homesliderwapper slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#homeslider" data-slide-to="0" class="active"></li>
+                        <li data-target="#homeslider" data-slide-to="1"></li>
+                        <li data-target="#homeslider" data-slide-to="2"></li>
+                    </ul>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-sliderimg"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                        <div class="carousel-item">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-sliderimg"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                        <div class="carousel-item">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-sliderimg"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <!-- <a class="carousel-control-prev" href="#homeslider" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#homeslider" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="right-box col-6">
+            <div class="wapperdiv">
+                <div class="chat-form">
+                    <div class="row chatboard">
+                        <div class="col-12">
+                            <div class="chatbox left">
+                                <div class="chat-head">
+                                    <img src="{{ 'layer-1.png' | assetspath}}" class="chat-avtar">
+                                    <h4>What are you looking for?</h4>
+                                </div>
+                                <div class="chat-body">
+                                    <div class="chatques">Submit my listing</div>
+                                    <div class="chatques">Find an Agency</div>
+                                    <div class="chatques">Leave a Review</div>
+                                    <div class="chatques">Other</div>
+                                </div>
+                            </div>
+                            <div class="chatbox right">
+                                <div class="chat-body">
+                                    <div class="chatques chatans">Find an Agency</div>
+                                    <div class="chatques chatans">Other</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="formwapper row">
+                        <div class="col-12">
+                            <mat-form-field class="input-text">
+                                <textarea matInput placeholder="Chat with the Bot"></textarea>
+                            </mat-form-field>
+                            <button mat-button class="chatsubmit"><i class="la la-angle-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -18,11 +18,6 @@
             <directory suffix="UserRegister.php">./tests/Feature</directory>
             <directory suffix="ForgetPassword.php">./tests/Feature</directory>
             <directory suffix="SetPassword.php">./tests/Feature</directory>
-            <directory suffix="TestCompany.php">./tests/Feature</directory>
-            <directory suffix="TestLocation.php">./tests/Feature</directory>
-            <directory suffix="TestCertificate.php">./tests/Feature</directory>
-            <directory suffix="TestAccolade.php">./tests/Feature</directory>
-            <directory suffix="TestPortfolio.php">./tests/Feature</directory>
             <directory suffix="Test.php">./tests/Feature</directory>
         </testsuite>
     </testsuites>

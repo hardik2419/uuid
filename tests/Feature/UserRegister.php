@@ -21,10 +21,11 @@ class UserRegister extends TestCase
         $data = json_decode(json_encode($data),true);
         $data['password'] = '123123';
         $data['password_confirmation'] = '123123';
+
         return $this->json('POST', 'api/register', $data)
-            ->assertStatus(201)
+            ->assertStatus(200)
             ->assertJsonStructure([
-                'data' => [
+                'user' => [
                     'id',
                     'first_name',
                     'last_name',
@@ -35,7 +36,7 @@ class UserRegister extends TestCase
                     'updated_at',
                 ],
                 'message',
-                'status_code'
+                'success'
             ]);
     }
 }

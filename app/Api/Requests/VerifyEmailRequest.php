@@ -8,6 +8,7 @@ class VerifyEmailRequest extends Request
     {
         return [
             'email' => 'required|email',
+            'token' => 'required',
         ];
     }
 }

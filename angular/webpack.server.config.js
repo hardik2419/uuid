@@ -12,7 +12,14 @@ module.exports = {
     filename: '[name].js'
   },
   module: {
-    rules: [{ test: /\.ts$/, loader: 'ts-loader' }]
+    rules: [
+      { test: /\.ts$/, loader: 'ts-loader' }
+      /* {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        include: path.resolve(__dirname, 'src/styles/common')
+      } */
+    ]
   },
   plugins: [
     new webpack.ContextReplacementPlugin(

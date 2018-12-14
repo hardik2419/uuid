@@ -1,0 +1,39 @@
+$fontPath : "/assets";
+@font-face {
+  font-family: 'icomoon';
+  src:  url(#{$fontPath}/fonts/icomoon.eot?58l0tg);
+  src:  url(#{$fontPath}/fonts/icomoon.eot?58l0tg#iefix) format('embedded-opentype'),
+    url(#{$fontPath}/fonts/icomoon.ttf?58l0tg) format('truetype'),
+    url(#{$fontPath}/fonts/icomoon.woff?58l0tg) format('woff'),
+    url(#{$fontPath}/fonts/icomoon.svg?58l0tg#icomoon) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000;
+}
+
+.icon-rightarrow:before {
+  content: "\e902";
+}
+.icon-sliderimg:before {
+  content: "\e901";
+  color: #fff;
+}
+.icon-menuicon:before {
+  content: "\e900";
+  color: #fff;
+}

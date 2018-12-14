@@ -1,0 +1,40 @@
+@import 'varibales';
+.logo {
+  width: 100%;
+  max-width: 136px;
+  top: 0;
+  float: left;
+  display: block;
+  position: absolute;
+  top: 57px;
+  left: 180px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .logo.mobile {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1023px) {
+  .logo {
+    top: 20px;
+    left: 80px;
+    right: 0;
+    vertical-align: middle;
+    img {
+      max-width: 100px;
+    }
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .logo.mobile {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+}

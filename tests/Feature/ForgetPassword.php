@@ -25,7 +25,7 @@ class ForgetPassword extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'message',
-                'status_code'
+                'success'
             ]);
     }
 }
