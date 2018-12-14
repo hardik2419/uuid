@@ -24,3 +24,5 @@ Route::post('set-password', 'UserController@setPassword');
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
 });
+
+Route::match(['get', 'post'], 'botman', 'BotManController@handle');
