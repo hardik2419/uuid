@@ -18,6 +18,7 @@
         "backpack/settings": "dev-master",
         "barryvdh/laravel-elfinder": "^0.4.1",
         "botman/botman": "^2.4",
+        "botman/driver-facebook": "^1.9",
         "botman/driver-web": "^1.5",
         "botman/studio-addons": "^1.4",
         "fideloper/proxy": "^4.0",

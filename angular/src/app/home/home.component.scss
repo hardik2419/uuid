@@ -79,7 +79,7 @@
       width: 13px;
       height: 12px;
       border-radius: 50%;
-      background: rgba(91, 97, 100, 0.67);
+      background: #{$black_opacity};
     }
     .active {
       background: #{$white};
@@ -92,7 +92,7 @@
     a {
       margin-left: 50px;
       margin-left: 50px;
-      color: #1a1a1d;
+      color: #{$black_russian};
       text-transform: uppercase;
       font-size: 14px;
       font-weight: 500;
@@ -112,6 +112,7 @@
 }
 
 .row.chatboard {
+  position: relative;
   .col-12 {
     padding: 0px 60px 0;
     overflow: auto;
@@ -121,14 +122,14 @@
     width: 100%;
     margin-bottom: 15px;
     h4 {
-      font-size: 30px;
+      font-size: 24px;
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
       letter-spacing: normal;
       text-align: left;
       line-height: 43px;
-      color: #000000;
+      color:#{$black};
     }
     img.chat-avtar {
       margin-right: 21px;
@@ -137,6 +138,7 @@
       height: 43px;
       float: left;
     }
+    img.chat-avtar.avtar-hide{opacity: 0;}
     .chat-body {
       padding-left: 65px;
     }
@@ -165,6 +167,63 @@
       background: #{$gray_light};
       color: #{$black};
     }
+    button.chatques {
+        cursor: pointer;
+    }
+    .chat-body.ng-star-inserted ul.listwapper {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      height: auto;
+      line-height: auto;
+      width: 85%;
+      background: transparent;
+      clear: none;
+      li.listing {
+          display: block;
+          background: #{$gray_light};
+          width: 100%;
+          padding: 5px;
+          margin-bottom: 5px;
+          float: left;
+          img.list-img {
+            max-width: 50px;
+            width: 100%;
+            float: left;
+            padding: 3px;
+            border: 1px solid #{$gray71};
+            margin-right: 10px;
+          }
+          p{
+            max-width: 89%;
+            float: left;
+            display: block;
+            line-height: normal;
+            color: #{$black};
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            samp{
+              font-size: 11px;
+              display: block;
+              padding-top: 5px;
+            }
+          }
+        }
+    }
+  }
+  .spinner {
+    bottom: 0px;
+    top: unset;
+    left: 60px;
+    -webkit-transform: none;
+    transform: none;
+    height: 40px;
+      div {
+          width: 13px;
+          height: 12px;
+          background-color: #c1c1c1;
+      }
   }
 }
 
@@ -194,7 +253,7 @@
       width: 100%;
       height: 80px;
     }
-    textarea.mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
+    .mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
       height: 55px;
       border: 0;
       padding-left: 45px;
@@ -229,6 +288,25 @@ button.chatsubmit.mat-button {
 .responsivediv {
   width: 100%;
   display: block;
+}
+@media only screen and (max-width: 1500px) {
+  .row.chatboard .chatbox {
+    margin-bottom: 5px;
+    h4 {
+      font-size: 23px;
+    }
+    img.chat-avtar{
+      margin-right: 14px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+    .chatques{
+      height: 45px;
+      font-size: 15px;
+      line-height: 45px;
+    }
+  }
 }
 
 @media only screen and (max-width: 1360px) {
@@ -288,7 +366,7 @@ button.chatsubmit.mat-button {
   }
   .responsivediv {
     height: 80px;
-    background: #1a1a1d;
+    background: #{$black_russian};
     position: relative;
   }
   .right-box.col-6 ul.right-menu {
@@ -313,7 +391,7 @@ button.chatsubmit.mat-button {
   .row.chatboard .col-12 {
     padding: 0 15px;
   }
-  .chat-form form.formwapper.row textarea.mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
+  .chat-form form.formwapper.row .mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
     padding-left: 0;
     padding-right: 55px;
   }
@@ -355,7 +433,7 @@ button.chatsubmit.mat-button {
         margin: auto;
         height: 100%;
         line-height: 80px;
-        color: #000000;
+        color:#{$black};
         font-size: 16px;
         padding-left: 45px;
     }

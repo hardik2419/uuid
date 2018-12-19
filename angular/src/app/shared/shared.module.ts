@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { MatInputModule, MatButtonModule } from '@angular/material';
@@ -16,16 +16,14 @@ import { Pipes } from './pipes';
 Services
 */
 
+import { Services } from './services';
 
 
-
-const Services = [
-
-];
 const Modules = [
     RouterModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     MatInputModule,
     MatButtonModule,
 ]
