@@ -18,6 +18,7 @@
   margin: 40px 0;
 }
 
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -38,22 +39,6 @@
   &.active {
     left: 90px;
   }
-}
-
-.overlay {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background: #{$black_opacity};
-  z-index: 998;
-  display: none;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-#sidebar {
   .sidebar-header {
     float: left;
     width: 100%;
@@ -86,12 +71,13 @@
       position: relative;
     }
     &.submenu {
-      display: none;
       position: absolute;
-      left: 100%;
+      left: 100% !important;
       top: 0;
       width: 100%;
-      max-height: 450px;
+      transform: none!important;
+      max-height: 550px;
+      background: transparent;
     }
     p {
       color: #{$white};
@@ -103,20 +89,39 @@
         padding: 6px 5px;
         color: #{$white};
         display: block;
+        line-height: 24px;
         &:hover {
-          color: #{$green};
+          color: $accent;
           text-decoration: none;
         }
-      }
-      &:hover > ul {
-          display: block;
+        i.la.la-angle-right.iconleft{
+          display: none;
+        }
+        .la-angle-right:before{
+          vertical-align: middle;
+        }
+        &.dropdown-toggle::after{display: none;}
       }
       &.active > a {
-        color: #{$green};
+        color: $accent;
       }
     }
   }
 }
+
+.overlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #{$black_opacity};
+  z-index: 998;
+  display: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 
 a[aria-expanded="true"] {
   color: #{$white};
@@ -145,28 +150,35 @@ a[aria-expanded="true"] {
     background-color: #{$black_russian};
     border: 0;
     margin: auto;
-    /* vertical-align: middle; */
     display: inline-grid;
     width: 90px;
+    @include respond(lg){
+        bottom: inherit;
+        width: 70px;
+        height: 80px;
+        left: 0;
+        background: transparent;
+      }
 
     .btn-info:focus, .btn-info.focus{
         box-shadow: none;
     }
-}
-.sidebarbutton.active {
-    z-index: 999;
-    background: #fff;
-    #dismiss{
-      display: flex;
-      i.icon-closed{
-        font-size: 1.8rem;
-        margin: auto;
+    &.active {
+      z-index: 999;
+      background: #{$white};
+      #dismiss{
+        display: flex;
+        cursor: pointer;
+        i.icon-closed{
+          font-size: 1.8rem;
+          margin: auto;
+        }
       }
-    }
-    #sidebarCollapse
-    {
-      display: none;
-    }
+      #sidebarCollapse
+      {
+        display: none;
+      }
+  }
 }
 button#sidebarCollapse {
   background: none;
@@ -175,20 +187,88 @@ button#sidebarCollapse {
 
 .hidden-menu {
   display: none;
-}
+  @include respond(md){
+    display: block;
 
-@media only screen and (max-width: 1023px) {
-  .sidebarbutton {
-    bottom: inherit;
-    width: 70px;
-    height: 80px;
-    left: 0;
-    background: transparent;
   }
 }
 
-@media only screen and (max-width: 599px) {
-  .hidden-menu {
-    display: block;
+/deep/{
+  body.active{
+    overflow-y: hidden;
+  }
+  .menubar{
+    .sidemenu{
+      #sidebar{
+        top: 100px;
+        right: -750px;
+        left: inherit;
+        opacity: 0;
+        padding: 0;
+        visibility: hidden;
+        &.active{
+          right: 90px;
+          opacity: 1;
+          visibility: visible;
+          left: inherit;
+        }
+        @include respond(lg){
+          top: 80px;
+          &.active{
+            right: 0;
+          }
+        }
+        .sidebar-header {
+            display: none;
+        }
+        .side-menu{
+          padding: 20px;
+          ul.components
+          {
+            float: right;
+            width: 100%;
+            li
+            {
+              a {
+                text-align: right;
+                i.la.la-angle-right.iconright{
+                  display: none;
+                }
+                i.la.la-angle-right.iconleft{
+                  display: inline-block !important;
+                  -ms-transform: rotate(180deg); /* IE 9 */
+                  -webkit-transform: rotate(180deg); /* Safari 3-8 */
+                  transform: rotate(180deg);
+                }
+              }
+              ul{
+                left: inherit !important;
+                right: 100%;
+              }
+            }
+          }
+        }
+      }
+    }
+    .sidebarbutton{
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+      right: 0;
+      background-color: $accent;
+      @include respond(lg){
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        bottom: 0;
+        background-color: $accent;
+        &.active{
+          background-color: $accent;
+          #dismiss i.icon-closed{
+            color: #{$white};
+          }
+        }
+      }
+    }
   }
 }

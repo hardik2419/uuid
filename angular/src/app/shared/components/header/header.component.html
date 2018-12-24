@@ -1,16 +1,25 @@
-<div class="headerwapper">
-	<div class="logo">
-	    <a href=""><img class="image-wapper" src="{{ 'logo.png' | assetspath }}"></a>
+<div class="headerwapper container-fluid">
+	<div class="row">
+		<div class="col-12">
+			<div class="logo">
+				<a href=""><img class="image-wapper" src="{{ 'logo.png' | assetspath }}"></a>
+			</div>
+			<div class="menubar">
+				<div class="sidemenu">
+					<app-sidebar></app-sidebar>
+				</div>
+				<ul class="right-menu">
+					<li>
+						<a href="#">Search</a>
+					</li>
+					<li>
+						<a routerLink="/login" routerLinkActive="active">Signin</a>
+					</li>
+					<li>
+						<a href="#">Leave a Review</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<ul class="right-menu">
-	    <li>
-	        <a href="#">Search</a>
-	    </li>
-	    <li>
-	        <a href="#">Signin</a>
-	    </li>
-	    <li>
-	        <a href="#">Leave a Review</a>
-	    </li>
-	</ul>
 </div>

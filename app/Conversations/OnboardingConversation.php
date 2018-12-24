@@ -4,13 +4,12 @@ namespace App\Conversations;
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
-use Illuminate\Support\Facades\Validator;
-use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\BotMan\Messages\Outgoing\Actions\Button;
-use BotMan\Drivers\Facebook\Extensions\ListTemplate;
-use BotMan\Drivers\Facebook\Extensions\ElementButton;
-use BotMan\Drivers\Facebook\Extensions\ButtonTemplate;
+use BotMan\BotMan\Messages\Outgoing\Question;
 use BotMan\Drivers\Facebook\Extensions\Element;
+use BotMan\Drivers\Facebook\Extensions\ElementButton;
+use BotMan\Drivers\Facebook\Extensions\ListTemplate;
+use Illuminate\Support\Facades\Validator;
 
 class OnboardingConversation extends Conversation
 {
@@ -21,7 +20,7 @@ class OnboardingConversation extends Conversation
                 'name' => $answer->getText(),
             ]);
 
-            $this->say('Nice to meet you <b>' . ucwords($answer->getText()).'</b>');
+            $this->say('Nice to meet you <b>' . ucwords($answer->getText()) . '</b>');
             $this->askEmail();
         });
     }
@@ -76,8 +75,7 @@ class OnboardingConversation extends Conversation
                 Button::create('Other')->value('other'),
             ]);
 
-
-        $this->ask($question, function(Answer $answer) {
+        $this->ask($question, function (Answer $answer) {
             if ($answer->isInteractiveMessageReply()) {
                 $this->bot->userStorage()->save([
                     'service' => $answer->getValue(),
@@ -88,17 +86,16 @@ class OnboardingConversation extends Conversation
     }
     public function companyList()
     {
-        for ($i=0; $i < 3; $i++) {
-            $data[$i] = Element::create('BotMan'.$i.' Laravel Starter')
+        for ($i = 0; $i < 3; $i++) {
+            $data[$i] = Element::create('BotMan' . $i . ' Laravel Starter')
                 ->subtitle('This is the best way to start with Laravel and BotMan')
                 ->image('https://botman.io/img/logo.png')
                 ->itemUrl('https://github.com/mpociot/botman-laravel-starter');
         }
         $this->say(ListTemplate::create()
-            ->useCompactView()
-            ->addGlobalButton(ElementButton::create('view more')->url('http://test.at'))
-            ->addElements($data)
-        );
+                ->useCompactView()
+                ->addGlobalButton(ElementButton::create('view more')->url('http://test.at'))
+                ->addElements($data));
     }
     public function userInformation($id = null)
     {

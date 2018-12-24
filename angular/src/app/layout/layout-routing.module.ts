@@ -4,7 +4,10 @@ import { LayoutComponent } from './components/layout.component';
 
 const routes: Routes = [
     {
-        path: '',component: LayoutComponent
+        path: '',component: LayoutComponent,
+        children: [
+            { path: 'login', loadChildren: './../login/login.module#LoginModule' },
+        ]
     }
 ];
 

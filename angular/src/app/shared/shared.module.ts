@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatInputModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { Conopnents } from "./components";
 
 /*
@@ -25,6 +25,7 @@ const Modules = [
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatIconModule,
     MatButtonModule,
 ]
 

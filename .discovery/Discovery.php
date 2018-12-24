@@ -1,6 +1,5 @@
 <?php
 
-
 namespace TheCodingMachine\Discovery;
 
 /**
@@ -28,8 +27,8 @@ class Discovery implements DiscoveryInterface
      */
     private function __construct()
     {
-        $this->values = require __DIR__.'/discovery_values.php';
-        $this->assetTypesArray = require __DIR__.'/discovery_asset_types.php';
+        $this->values          = require __DIR__ . '/discovery_values.php';
+        $this->assetTypesArray = require __DIR__ . '/discovery_asset_types.php';
     }
 
     /**
@@ -53,7 +52,7 @@ class Discovery implements DiscoveryInterface
      * @param string $assetType
      * @return string[]
      */
-    public function get(string $assetType) : array
+    public function get(string $assetType): array
     {
         return $this->values[$assetType] ?? [];
     }
@@ -66,11 +65,14 @@ class Discovery implements DiscoveryInterface
      * @param string $assetType
      * @return AssetTypeInterface
      */
-    public function getAssetType(string $assetType) : AssetTypeInterface
+    public function getAssetType(string $assetType): AssetTypeInterface
     {
         if (!isset($this->assetTypes[$assetType])) {
             if (isset($this->assetTypesArray[$assetType])) {
-                $this->assetTypes[$assetType] = ImmutableAssetType::fromArray($assetType, $this->assetTypesArray[$assetType]);
+                $this->assetTypes[$assetType] = ImmutableAssetType::fromArray(
+                    $assetType,
+                    $this->assetTypesArray[$assetType]
+                );
             } else {
                 $this->assetTypes[$assetType] = ImmutableAssetType::fromArray($assetType, []);
             }

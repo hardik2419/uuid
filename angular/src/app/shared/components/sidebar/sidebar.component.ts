@@ -22,12 +22,14 @@ export class SideBarComponent implements OnInit, AfterViewInit, OnDestroy {
         $('#dismiss, .overlay').on('click', function () {
             $('.sidebarbutton').removeClass('active');
             $('#sidebar').removeClass('active');
+            $('body').removeClass('active');
             $('.overlay').fadeOut();
         });
 
         $('#sidebarCollapse').on('click', function () {
             $('.sidebarbutton').addClass('active');
             $('#sidebar').addClass('active');
+            $('body').addClass('active');
             $('.overlay').fadeIn();
             $('.collapse.in').toggleClass('in');
             $('a[aria-expanded=true]').attr('aria-expanded', 'false');

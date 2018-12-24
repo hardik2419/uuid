@@ -1,8 +1,83 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'varibales';
-@import '_spiner.scss';
-@import 'fontstyle.scss';
-@import 'line-awesome.scss';
-@import 'styles.scss';
+@import '_spiner';
+@import 'fontstyle';
+@import 'line-awesome';
+@import 'styles';
+@import 'theme';
 
 
+/* .container{
+    padding-left: 0;
+    padding-right: 0;
+} */
+.no-padding{
+    padding: 0;
+}
+a{
+    color: $accent;
+    &:hover{
+        color: $accent;
+    }
+}
+button:focus{
+    outline: none;
+}
+/* button.mat-button{
+    background: #{$primary_button_bg};
+    color:#{$primary_button_color};
+    padding: 0px 20px;
+    border: 1px solid #{$primary_button_color};
+} */
+ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.mat-flat-button, .mat-button{
+    border-radius: 0px !important;
+    border: 1px solid !important;
+    transition: all 500ms;
+    &[color="accent"]{
+       border-color: $accent !important;
+    }
+    &.lg {
+        font-size: 16px !important;
+        padding: 7px 36px;
+    }
+    &:hover{
+        background: transparent !important;
+        &[color="accent"]{
+            color: $accent !important;
+        }
+    }
+}
+
+
+$icon-small-container-size: 32px;
+$icon-small-size: 16px;
+
+.mat-icon-button.small {
+    width: $icon-small-container-size;
+    height: $icon-small-container-size;
+    line-height: $icon-small-container-size;
+
+    .mat-icon, .mat-icon-button i {
+    line-height: $icon-small-size;
+    }
+
+    .mat-icon {
+    width: $icon-small-size;
+    height: $icon-small-size;
+    }
+
+    .material-icons {
+    font-size: $icon-small-size;
+    }
+}
+@media only screen and (max-width: 767px) {
+  .container{
+      max-width: 100%;
+  }
+}

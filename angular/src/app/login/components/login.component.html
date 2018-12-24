@@ -1,0 +1,48 @@
+<app-breadcrumb *ngIf="breadcrumbs" [pagelink]="breadcrumbs"></app-breadcrumb>
+<div class="container loginwapper">
+    <div class="row">
+        <div class="col-xl-6 col-md-6 col-sm-12 p-0">
+            <div class="login-from">
+                <h3 class="mb-3">Sign in with agenc Account</h3>
+                <p class="subline">You may login with either your assigned username or your e-mail address.</p>
+                <form class="formwapper mb-5" [formGroup]="loginform" (ngSubmit)="onSubmit()" novalidate>
+                    <div class="form-group username">
+                        <mat-form-field class="input-text">
+                            <mat-icon matPrefix><span class="la la-user"></span></mat-icon>
+                            <input autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" formControlName="username"
+                                name="username" matInput placeholder="Username or e-mail address">
+                            <mat-error *ngIf="submitted && f.username.errors">
+                                <span *ngIf="f.username.errors.required">Please enter Username or e-mail address !!!</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group password">
+                        <mat-form-field class="input-text">
+                            <mat-icon matPrefix><span class="la la-lock"></span></mat-icon>
+                            <input autocomplete="off" type="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password"
+                                name="password" matInput placeholder="Password">
+                            <mat-error *ngIf="submitted && f.password.errors">
+                                <span *ngIf="f.password.errors.required">Please enter Password.</span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group password">
+                        <button mat-flat-button class="lg mr-3" color="accent">Login</button>
+                        <button mat-flat-button class="lg mr-3" color="accent">Signup</button>
+                        <a href="" class="forget-password">Forgot password?</a>
+                    </div>
+                </form>
+                <div class="social_login">
+                    <h6 class="mb-3">Login with Social Media</h6>
+                    <ul>
+                        <li><a class="mr-2 linkedin" href=""><img src="{{ 'linkedin.png' | assetspath }}"></a></li>
+                        <li><a class="mr-2 google" href=""><img src="{{ 'google.png' | assetspath }}"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6 col-sm-12 p-0 login-image">
+            <img src="{{ 'login-right.jpg' | assetspath }}">
+        </div>
+    </div>
+</div>

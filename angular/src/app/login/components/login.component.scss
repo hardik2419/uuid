@@ -1,0 +1,95 @@
+@import 'varibales';
+/deep/{
+    .container.loginwapper{
+        margin-top: -80px;
+        background: #{$white};
+        margin-bottom: 80px;
+        border: 1px solid #{$gainsboro};
+        border-radius: 3px;
+        box-shadow: 1px 1.7px 1px 0 rgba(0, 0, 0, 0.15);
+        border-right: 0;
+        @include respond(lg){
+            .col-md-6.col-sm-12{
+                max-width: 100%;
+                flex: 100%;
+            }
+        }
+        @include respond(md){
+            border: 0;
+            box-shadow: none;
+            margin-top: 0;
+        }
+        .login-image
+        {
+            margin: -1px 0;
+            @include respond(lg){
+                display: none;
+            }
+            img{
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+        .login-from{
+            padding: 30px;
+            @include respond(xl){
+                padding: 15px;
+            }
+            .subline{
+                font-size: 13px;
+            }
+            .form-group{
+                button.mat-button{
+                    border-radius: 0;
+                    margin-right: 15px;
+                    &.btnsignup{
+                        background: transparent;
+                    }
+                }
+                a.forget-password {
+                    text-align: right;
+                    float: right;
+                    line-height: 36px;
+                }
+                .input-text {
+                    width: 100%;
+                    .mat-form-field-flex{
+                        position: relative;
+                        span.la{
+                            vertical-align: middle;
+                        }
+                    }
+                    &.mat-focused .mat-form-field-ripple
+                    {
+                        background-color: $accent;
+                    }
+                    .mat-form-field-appearance-legacy .mat-form-field-underline
+                    {
+                        background-color: #{$gray_light};
+                    }
+
+                }
+            }
+            .social_login{
+                ul li{
+                    display: inline-block;
+                    a{
+                        width: 40px;
+                        height: 40px;
+                        display: block;
+                        line-height: 33px;
+                        border: 1px solid;
+                        text-align: center;
+                        border-radius:5px;
+                        &.linkedin {
+                            border-color: #{$linkedin};
+                        }
+                        &.google {
+                            border-color: #{$google};
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

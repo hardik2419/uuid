@@ -5,17 +5,28 @@
   width: 100%;
   height: 100%;
   float: left;
+  @include respond(lg){
+    max-width: 100%;
+    float: right;
+  }
 }
 
 .left-box {
   background:url(#{$imagePath}/home-left-boy.png) no-repeat;
   background-size: 100%;
-  background-color: #{$black};
+  background-color: $primary;
   display: block;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
+  @include respond(1360px){
+    background-size: auto;
+    background-position: top center;
+  }
+  @include respond(lg){
+    display: none;
+  }
   img {
     width: 100%;
     height: 100%;
@@ -28,13 +39,24 @@
   top: 0;
   bottom: 0;
   right: 0;
+  @include respond(lg){
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 .homesliderwapper {
   bottom: 80px;
   left: 180px;
   position: absolute;
-  color: #{$white};
+  color: $white;
+  @include respond(1360px){
+    left: 95px;
+  }
+  @include respond(xl){
+    left: 90px;
+  }
   h3 {
     font-size: 32px;
     font-weight: normal;
@@ -46,6 +68,10 @@
     font-size: 1.9rem;
     font-family: NoeDisplay;
     padding-bottom: 22px;
+    @include respond(xl){
+      font-size: 24px;
+      padding-bottom: 12px;
+    }
   }
   p {
     font-size: 20px;
@@ -61,14 +87,23 @@
   .carousel-item .icon-sliderimg {
     font-size: 50px;
     display: inline-block;
+    @include respond(xl){
+      font-size: 30px;
+    }
   }
   span {
     display: block;
+    @include respond(xl){
+      font-size: 14px;
+    }
   }
   samp {
     font-size: 14px;
     display: block;
-    color: #{$gray};
+    color: $gray;
+    @include respond(xl){
+      font-size: 11px;
+    }
   }
   .carousel-indicators {
     left: 0;
@@ -79,10 +114,10 @@
       width: 13px;
       height: 12px;
       border-radius: 50%;
-      background: #{$black_opacity};
+      background: $black_opacity;
     }
     .active {
-      background: #{$white};
+      background: $white;
     }
   }
 }
@@ -92,10 +127,16 @@
     a {
       margin-left: 50px;
       margin-left: 50px;
-      color: #{$black_russian};
+      color: $black_russian;
       text-transform: uppercase;
       font-size: 14px;
       font-weight: 500;
+      @include respond(lg){
+        color: $white;
+        line-height: 80px;
+        margin-right: 50px;
+        margin-left: 0;
+      }
     }
     &:last-child a {
       margin-right: 0;
@@ -109,6 +150,12 @@
   padding-top: 50px;
   text-align: right;
   padding-right: 60px;
+  @include respond(lg){
+    padding: 0;
+  }
+  @include respond(md){
+    display: none;
+  }
 }
 
 .row.chatboard {
@@ -116,6 +163,9 @@
   .col-12 {
     padding: 0px 60px 0;
     overflow: auto;
+    @include respond(md){
+      padding: 0 15px;
+    }
   }
   .chatbox {
     float: left;
@@ -129,7 +179,13 @@
       letter-spacing: normal;
       text-align: left;
       line-height: 43px;
-      color:#{$black};
+      color:$primary;
+      @include respond(1500px){
+        font-size: 23px;
+      }
+      @include respond(md){
+        font-size: 20px;
+      }
     }
     img.chat-avtar {
       margin-right: 21px;
@@ -137,6 +193,12 @@
       width: 43px;
       height: 43px;
       float: left;
+      @include respond(1500px){
+        margin-right: 14px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+      }
     }
     img.chat-avtar.avtar-hide{opacity: 0;}
     .chat-body {
@@ -145,7 +207,7 @@
     .chatques {
       height: 55px;
       border-radius: 3px;
-      background-color: #{$green};
+      background-color: $accent;
       border: 0;
       padding: 0px 19px;
       margin-bottom: 5px;
@@ -154,18 +216,32 @@
       font-style: normal;
       font-stretch: normal;
       text-align: left;
-      color: #{$white};
+      color: $white;
       line-height: 55px;
       width: auto;
       float: left;
       clear: both;
       position: relative;
+      @include respond(1500px){
+        height: 45px;
+        font-size: 15px;
+        line-height: 45px;
+      }
+      @include respond(xl){
+        line-height: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      @include respond(md){
+        line-height: 35px;
+        height: 35px;
+      }
     }
     &.right .chatques.chatans {
       clear: both;
       float: right;
-      background: #{$gray_light};
-      color: #{$black};
+      background: $gray_light;
+      color: $primary;
     }
     button.chatques {
         cursor: pointer;
@@ -181,7 +257,7 @@
       clear: none;
       li.listing {
           display: block;
-          background: #{$gray_light};
+          background: $gray_light;
           width: 100%;
           padding: 5px;
           margin-bottom: 5px;
@@ -191,7 +267,7 @@
             width: 100%;
             float: left;
             padding: 3px;
-            border: 1px solid #{$gray71};
+            border: 1px solid $gray71;
             margin-right: 10px;
           }
           p{
@@ -199,7 +275,7 @@
             float: left;
             display: block;
             line-height: normal;
-            color: #{$black};
+            color: $primary;
             padding: 0;
             margin: 0;
             font-size: 14px;
@@ -210,6 +286,9 @@
             }
           }
         }
+    }
+    @include respond(1500px){
+      margin-bottom: 5px;
     }
   }
   .spinner {
@@ -238,7 +317,7 @@
     content: '';
     border-top: 8px solid transparent;
     border-bottom: 8px solid transparent;
-    border-left: 8px solid #{$gray_light};
+    border-left: 8px solid $gray_light;
     position: absolute;
   }
 }
@@ -248,7 +327,7 @@
   width: 100%;
   bottom: 0;
   form.formwapper.row {
-    border-top: 1px solid #{$gray71};
+    border-top: 1px solid $gray71;
     mat-form-field.input-text.mat-form-field {
       width: 100%;
       height: 80px;
@@ -260,6 +339,10 @@
       margin-top: 15px;
       padding-right: 115px;
       resize: none;
+      @include respond(md){
+        padding-left: 0;
+        padding-right: 55px;
+      }
     }
   }
 }
@@ -276,167 +359,60 @@ button.chatsubmit.mat-button {
   font-weight: normal;
   font-style: normal;
   font-stretch: normal;
-  color: #{$green};
-  border: 1px solid #{$green};
+  color: $accent;
+  border: 1px solid $accent;
   width: 50px;
   height: 50px;
   padding: 0;
-  /* margin: 0; */
+  background: transparent;
   min-width: auto;
+  @include respond(md){
+    right: 15px;
+  }
 }
 
 .responsivediv {
   width: 100%;
   display: block;
-}
-@media only screen and (max-width: 1500px) {
-  .row.chatboard .chatbox {
-    margin-bottom: 5px;
-    h4 {
-      font-size: 23px;
-    }
-    img.chat-avtar{
-      margin-right: 14px;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-    }
-    .chatques{
-      height: 45px;
-      font-size: 15px;
-      line-height: 45px;
-    }
-  }
-}
-
-@media only screen and (max-width: 1360px) {
-  .left-box {
-    background-size: auto;
-    background-position: top center;
-  }
-  .homesliderwapper {
-    left: 95px;
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .row.chatboard .chatbox {
-    h4 {
-      font-size: 24px;
-    }
-    .chatques {
-      line-height: 40px;
-      height: 40px;
-      font-size: 14px;
-    }
-  }
-  .homesliderwapper {
-    left: 90px;
-    .carousel-item .icon-sliderimg {
-      font-size: 30px;
-    }
-    h3 {
-      font-size: 24px;
-      padding-bottom: 12px;
-    }
-    span {
-      font-size: 14px;
-    }
-    samp {
-      font-size: 11px;
-    }
-  }
-}
-
-@media only screen and (max-width: 1023px) {
-  .left-box.col-6 {
-    display: none;
-  }
-  .right-box.col-6 {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-    .wapperdiv {
-      max-width: 100%;
-      float: right;
-    }
-    .logo {
-      display: block;
-    }
-  }
-  .responsivediv {
+  @include respond(lg){
     height: 80px;
-    background: #{$black_russian};
+    background: $black_russian;
     position: relative;
   }
-  .right-box.col-6 ul.right-menu {
-    padding: 0;
-  }
-  .homewapper .row {
-    margin-left: 0;
-    margin-right: 0;
-  }
-  .right-box.col-6 ul.right-menu li a {
-    color: #{$white};
-    line-height: 80px;
-    margin-right: 50px;
-    margin-left: 0;
-  }
 }
 
-@media only screen and (max-width: 599px) {
-  .right-box.col-6 ul.right-menu {
-    display: none;
-  }
-  .row.chatboard .col-12 {
-    padding: 0 15px;
-  }
-  .chat-form form.formwapper.row .mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
-    padding-left: 0;
-    padding-right: 55px;
-  }
-  button.chatsubmit.mat-button[_ngcontent-c1] {
-    right: 15px;
-  }
-  .row.chatboard .chatbox {
-    h4 {
-      font-size: 20px;
-    }
-    .chatques {
-      line-height: 35px;
-      height: 35px;
-    }
-  }
-}
 /* home css */
 /deep/{
     .chat-form form.formwapper.row {
-    .input-text.mat-focused .mat-form-field-label, .mat-form-field-hide-placeholder.mat-form-field-should-float .mat-form-field-label {
-        display: none;
-    }
-    .mat-form-field-appearance-legacy {
-        .mat-form-field-underline {
-        display: none;
-        }
-        .mat-form-field-infix, .mat-form-field-wrapper {
-        padding: 0;
-        margin: 0;
-        border: 0;
-        }
-    }
-    .mat-form-field-label-wrapper {
-        padding-top: 0;
-        top: 0;
-    }
-    .mat-form-field-appearance-legacy .mat-form-field-label {
+      .input-text.mat-focused .mat-form-field-label, .mat-form-field-hide-placeholder.mat-form-field-should-float .mat-form-field-label {
+          display: none;
+      }
+      .mat-form-field-appearance-legacy {
+          .mat-form-field-underline {
+          display: none;
+          }
+          .mat-form-field-infix, .mat-form-field-wrapper {
+          padding: 0;
+          margin: 0;
+          border: 0;
+          }
+      }
+      .mat-form-field-label-wrapper {
+          padding-top: 0;
+          top: 0;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-label {
         top: 0;
         margin: auto;
         height: 100%;
         line-height: 80px;
-        color:#{$black};
+        color:$primary;
         font-size: 16px;
         padding-left: 45px;
-    }
+        @include respond(md){
+          padding-left: 0;
+        }
+      }
     }
 
     @media only screen and (max-width: 599px) {
