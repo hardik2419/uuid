@@ -26,6 +26,7 @@ class CreateCompanyLocationTable extends Migration
             $table->string('country',30)->nullable();
             $table->string('zip_code',10)->nullable();
             $table->boolean('is_primary')->default(false);
+            $table->string('employee_count',6)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

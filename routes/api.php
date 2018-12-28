@@ -23,4 +23,20 @@ Route::post('set-password', 'UserController@setPassword');
 
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
+
+    /* Company API */
+    Route::resource('company', 'CompanyController')->except(['create', 'edit']);
+
+    /* Location API */
+    Route::resource('location', 'LocationController')->except(['create', 'edit']);
+
+    /* Certifications API */
+    Route::resource('certificate', 'CertificateController')->except(['create', 'edit']);
+
+    /* Certifications API */
+    Route::resource('accolade', 'AccoladesController')->except(['create', 'edit']);
+    /* Services API */
+    Route::resource('services', 'ServicesController')->except(['create', 'edit']);
+    /* Services API */
+    Route::resource('portfolio', 'PortfoliosController')->except(['create', 'edit']);
 });

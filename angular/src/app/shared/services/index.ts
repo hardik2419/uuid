@@ -1,7 +1,7 @@
-import { Home } from "./home.service";
+import { ChatBotService } from "./chat-bot.service";
 
 //export { LogoComponent, SideBarComponent } from "./components";
 
 export const Services = [
-    Home
+    ChatBotService
 ];

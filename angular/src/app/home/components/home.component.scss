@@ -1,0 +1,423 @@
+@import 'varibales';
+.wapperdiv {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  float: left;
+  @include respond(lg){
+    max-width: 100%;
+    float: right;
+  }
+}
+
+.left-box {
+  background:url(#{$imagePath}/home-left-boy.png) no-repeat;
+  background-size: 100%;
+  background-color: $primary;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  @include respond(1360px){
+    background-size: auto;
+    background-position: top center;
+  }
+  @include respond(lg){
+    display: none;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.right-box.col-6 {
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  @include respond(lg){
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.homesliderwapper {
+  bottom: 80px;
+  left: 180px;
+  position: absolute;
+  color: $white;
+  @include respond(1360px){
+    left: 95px;
+  }
+  @include respond(xl){
+    left: 90px;
+  }
+  h3 {
+    font-size: 32px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.45;
+    letter-spacing: normal;
+    text-align: left;
+    font-size: 1.9rem;
+    font-family: NoeDisplay;
+    padding-bottom: 22px;
+    @include respond(xl){
+      font-size: 24px;
+      padding-bottom: 12px;
+    }
+  }
+  p {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    text-align: left;
+    display: inline-block;
+    max-width: 90%;
+    padding-left: 20px;
+  }
+  .carousel-item .icon-sliderimg {
+    font-size: 50px;
+    display: inline-block;
+    @include respond(xl){
+      font-size: 30px;
+    }
+  }
+  span {
+    display: block;
+    @include respond(xl){
+      font-size: 14px;
+    }
+  }
+  samp {
+    font-size: 14px;
+    display: block;
+    color: $gray;
+    @include respond(xl){
+      font-size: 11px;
+    }
+  }
+  .carousel-indicators {
+    left: 0;
+    right: inherit;
+    margin: 0;
+    bottom: -25px;
+    li {
+      width: 13px;
+      height: 12px;
+      border-radius: 50%;
+      background: $black_opacity;
+    }
+    .active {
+      background: $white;
+    }
+  }
+}
+
+.right-box.col-6 ul.right-menu {
+  li {
+    a {
+      margin-left: 50px;
+      margin-left: 50px;
+      color: $black_russian;
+      text-transform: uppercase;
+      font-size: 14px;
+      font-weight: 500;
+      @include respond(lg){
+        color: $white;
+        line-height: 80px;
+        margin-right: 50px;
+        margin-left: 0;
+      }
+    }
+    &:last-child a {
+      margin-right: 0;
+    }
+    display: inline-block;
+  }
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: block;
+  padding-top: 50px;
+  text-align: right;
+  padding-right: 60px;
+  @include respond(lg){
+    padding: 0;
+  }
+  @include respond(md){
+    display: none;
+  }
+}
+
+.row.chatboard {
+  position: relative;
+  .col-12 {
+    padding: 0px 60px 0;
+    overflow: auto;
+    @include respond(md){
+      padding: 0 15px;
+    }
+  }
+  .chatbox {
+    float: left;
+    width: 100%;
+    margin-bottom: 15px;
+    h4 {
+      font-size: 24px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: normal;
+      text-align: left;
+      line-height: 43px;
+      color:$primary;
+      @include respond(1500px){
+        font-size: 23px;
+      }
+      @include respond(md){
+        font-size: 20px;
+      }
+    }
+    img.chat-avtar {
+      margin-right: 21px;
+      border-radius: 50%;
+      width: 43px;
+      height: 43px;
+      float: left;
+      @include respond(1500px){
+        margin-right: 14px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+      }
+    }
+    img.chat-avtar.avtar-hide{opacity: 0;}
+    .chat-body {
+      padding-left: 65px;
+    }
+    .chatques {
+      height: 55px;
+      border-radius: 3px;
+      background-color: $accent;
+      border: 0;
+      padding: 0px 19px;
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      text-align: left;
+      color: $white;
+      line-height: 55px;
+      width: auto;
+      float: left;
+      clear: both;
+      position: relative;
+      @include respond(1500px){
+        height: 45px;
+        font-size: 15px;
+        line-height: 45px;
+      }
+      @include respond(xl){
+        line-height: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      @include respond(md){
+        line-height: 35px;
+        height: 35px;
+      }
+    }
+    &.right .chatques.chatans {
+      clear: both;
+      float: right;
+      background: $gray_light;
+      color: $primary;
+    }
+    button.chatques {
+        cursor: pointer;
+    }
+    .chat-body.ng-star-inserted ul.listwapper {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      height: auto;
+      line-height: auto;
+      width: 85%;
+      background: transparent;
+      clear: none;
+      li.listing {
+          display: block;
+          background: $gray_light;
+          width: 100%;
+          padding: 5px;
+          margin-bottom: 5px;
+          float: left;
+          img.list-img {
+            max-width: 50px;
+            width: 100%;
+            float: left;
+            padding: 3px;
+            border: 1px solid $gray71;
+            margin-right: 10px;
+          }
+          p{
+            max-width: 89%;
+            float: left;
+            display: block;
+            line-height: normal;
+            color: $primary;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            samp{
+              font-size: 11px;
+              display: block;
+              padding-top: 5px;
+            }
+          }
+        }
+    }
+    @include respond(1500px){
+      margin-bottom: 5px;
+    }
+  }
+  .spinner {
+    bottom: 0px;
+    top: unset;
+    left: 60px;
+    -webkit-transform: none;
+    transform: none;
+    height: 40px;
+      div {
+          width: 13px;
+          height: 12px;
+          background-color: #c1c1c1;
+      }
+  }
+}
+
+.chatbox.right .chat-body {
+  max-width: 80%;
+  float: right;
+  width: 100%;
+  .chatques.chatans::after {
+    left: 100%;
+    top: 10px;
+    width: 0;
+    content: '';
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid $gray_light;
+    position: absolute;
+  }
+}
+
+.chat-form {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  form.formwapper.row {
+    border-top: 1px solid $gray71;
+    mat-form-field.input-text.mat-form-field {
+      width: 100%;
+      height: 80px;
+    }
+    .mat-input-element.mat-form-field-autofill-control.cdk-text-field-autofill-monitored {
+      height: 55px;
+      border: 0;
+      padding-left: 45px;
+      margin-top: 15px;
+      padding-right: 115px;
+      resize: none;
+      @include respond(md){
+        padding-left: 0;
+        padding-right: 55px;
+      }
+    }
+  }
+}
+
+button.chatsubmit.mat-button {
+  position: absolute;
+  right: 60px;
+  top: 0;
+  bottom: 0;
+  vertical-align: middle;
+  height: 60px;
+  margin: auto;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  color: $accent;
+  border: 1px solid $accent;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  background: transparent;
+  min-width: auto;
+  @include respond(md){
+    right: 15px;
+  }
+}
+
+.responsivediv {
+  width: 100%;
+  display: block;
+  @include respond(lg){
+    height: 80px;
+    background: $black_russian;
+    position: relative;
+  }
+}
+
+/* home css */
+/deep/{
+    .chat-form form.formwapper.row {
+      .input-text.mat-focused .mat-form-field-label, .mat-form-field-hide-placeholder.mat-form-field-should-float .mat-form-field-label {
+          display: none;
+      }
+      .mat-form-field-appearance-legacy {
+          .mat-form-field-underline {
+          display: none;
+          }
+          .mat-form-field-infix, .mat-form-field-wrapper {
+          padding: 0;
+          margin: 0;
+          border: 0;
+          }
+      }
+      .mat-form-field-label-wrapper {
+          padding-top: 0;
+          top: 0;
+      }
+      .mat-form-field-appearance-legacy .mat-form-field-label {
+        top: 0;
+        margin: auto;
+        height: 100%;
+        line-height: 80px;
+        color:$primary;
+        font-size: 16px;
+        padding-left: 45px;
+        @include respond(md){
+          padding-left: 0;
+        }
+      }
+    }
+
+    @media only screen and (max-width: 599px) {
+    .chat-form form.formwapper.row .mat-form-field-appearance-legacy .mat-form-field-label {
+        padding-left: 0;
+    }
+    }
+}

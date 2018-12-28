@@ -11,7 +11,7 @@
     "build-dev": "ng build --prod --aot --configuration=dev --base-href=/agency --deploy-url=/agency/angular --output-hashing=none && npm run copy",
     "copy": "rm -rf ../public/angular && cp -r dist/agency/ ../public/angular/",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
-    "serve:ssr": "node dist/server",
+    "serve:ssr": "node dist/server.js",
     "build:client-and-server-bundles": "ng build --prod && ng run agency:server",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },

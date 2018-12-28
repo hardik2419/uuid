@@ -2,19 +2,19 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-use App\Models\Service;
 use App\Api\Requests\ServicesRequest;
 use App\Api\Resources\ServicesResource;
+use App\Http\Controllers\Controller;
+use App\Models\Service;
+use Illuminate\Http\Request;
 
+/**
+ * @resource Service
+ */
 class ServicesController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Services
      */
     public function index()
     {
@@ -22,10 +22,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Service
      */
     public function store(ServicesRequest $request)
     {
@@ -34,14 +31,14 @@ class ServicesController extends Controller
             if (!$company_id) {
                 throw new \Exception('sorry! Company not found', 400);
             }
-            $insert_data = $request->only(['name','category','focus']);
+            $insert_data = $request->only(['name', 'category', 'focus']);
 
             $insert_data['company_id'] = $company_id;
-            $services = Service::create($insert_data);
+            $services                  = Service::create($insert_data);
 
             return (new ServicesResource($services))->additional([
                 'status_code' => 200,
-                'message' => 'Services Added.',
+                'message'     => 'Services Added.',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -49,10 +46,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Service
      */
     public function show($id)
     {
@@ -60,11 +54,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Service
      */
     public function update(Request $request, $id)
     {
@@ -72,10 +62,7 @@ class ServicesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Service
      */
     public function destroy($id)
     {

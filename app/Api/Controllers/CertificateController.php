@@ -6,16 +6,15 @@ use App\Api\Requests\CertificateRequest;
 use App\Api\Resources\CertificateResource;
 use App\Http\Controllers\Controller;
 use App\Models\Certificate;
+use Illuminate\Http\Request;
 
 /**
- * @resource Auth
+ * @resource Certificate
  */
 class CertificateController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Certificates
      */
     public function index()
     {
@@ -23,17 +22,14 @@ class CertificateController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Certificate
      */
     public function store(CertificateRequest $request)
     {
         try {
             $company_id = \Auth::user()->company->id;
             if (!$company_id) {
-                throw new \Exception('sorry! Company not found', 400);
+                throw new \Exception('Company not found', 400);
             }
             $insert_data               = $request->only(['name', 'email', 'years', 'description', 'image']);
             $insert_data['company_id'] = $company_id;
@@ -41,7 +37,7 @@ class CertificateController extends Controller
 
             return (new CertificateResource($certificate))->additional([
                 'status_code' => 200,
-                'message'     => 'Certificate Added.',
+                'message'     => 'Certificate successfully added',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -49,10 +45,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Certificate
      */
     public function show($id)
     {
@@ -60,11 +53,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Certificate
      */
     public function update(Request $request, $id)
     {
@@ -72,10 +61,7 @@ class CertificateController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Certificate
      */
     public function destroy($id)
     {

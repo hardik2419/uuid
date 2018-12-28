@@ -1,0 +1,164 @@
+@import 'varibales';
+.agenc-top{
+    background: $primary;
+    border-top: 1px solid $black_russian;
+    color: $white;
+    .col-12{
+        display: table;
+        span{
+            display: table-cell;
+            &.year-review{
+                color: $gray_dark;
+                font-size: 30px;
+                font-weight: 500;
+                position: relative;
+                &:after {
+                    content: '|';
+                    position: absolute;
+                    right: 7px;
+                }
+            }
+            &.title{
+                font-size: 30px;
+                font-weight: 500;
+            }
+            &.update-date{
+                text-align: right;
+                color: rgba(255, 255, 255, 0.3);
+            }
+        }
+    }
+}
+.agenc-user-info{
+    background: $user_info;
+    color: $white;
+    .col-12{
+        display: table;
+        span{
+            display: table-cell;
+            &.user-name{
+                img {
+                    max-width: 25px;
+                    border-radius: 50%;
+                }
+            }
+            &.info{
+                text-align: right;
+                a{
+                    color: $white;
+                    &:hover{
+                        color: $accent;
+                    }
+                }
+            }
+        }
+    }
+}
+.agenc-fillter-wapper{
+    background: $breadcamp;
+    color: $primary;
+    height: 195px;
+    .fillters{
+        line-height: 60px;
+        span{
+            &.firms{
+                font-size: 21.5px;
+                font-weight: bold;
+                position: relative;
+                display: block;
+                &:after {
+                    border-right: 1px solid $gainsboro;
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    height: 100%;
+                    right: 0;
+                }
+            }
+        }
+        .results{
+            span{
+                position: relative;
+                display: block;
+                .la-plus{
+                    position: absolute;
+                    right: 0;
+                    line-height: 60px;
+                }
+            }
+        }
+        /deep/{
+            .review-fillter{
+                position: relative;
+                color: $accent;
+                text-align: center;
+                label{
+                    margin: 0;
+                }
+                &:after{
+                    border-bottom: 1px solid $accent;
+                    content: '';
+                    position: absolute;
+                    height: 1px;
+                    width: 75%;
+                    bottom: 10px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                }
+            }
+            .sort-by {
+                position: relative;
+                .mat-form-field-appearance-legacy .mat-form-field-underline{
+                    display: none;
+                }
+                &:after{
+                    border-right: 1px solid $gainsboro;
+                    content: '';
+                    position: absolute;
+                    width: 1px;
+                    height: 100%;
+                    right: 7px;
+                }
+            }
+        }
+    }
+}
+.agenc-content-wapper{
+    margin-top: -80px;
+    min-height: 300px;
+    .listing-wapper {
+        background: $white;
+        display: table;
+        .listing-img {
+            text-align: center;
+            display: table-cell;
+            vertical-align: middle;
+            .company-logo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+        .listing-content {
+            display: table-cell;
+            width: 100%;
+            color: $gray_dark;
+            h3{
+                color: $primary;
+            }
+            .tagline,check-list{
+                display: block;
+            }
+            .project-info{
+                width: 100%;
+                li{
+                    display: inline-block;
+                    padding: 0 20px;
+                    &:first-child{
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}

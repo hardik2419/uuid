@@ -17,7 +17,7 @@ class UserNotification extends Notification
      */
     public function __construct($data)
     {
-        $this->my_notification = $data;
+        $this->data = $data;
     }
 
     /**
@@ -39,17 +39,17 @@ class UserNotification extends Notification
      */
     public function toMail($notifiable)
     {
-        $data = $this->my_notification;
-        if ($data->subject) {
-            $subject = $data->subject;
+        if ($data['subject']) {
+            $subject = $data['subject'];
         } else {
-            $subject = env('SUBJECT', 'Welcome Agenc');
+            $subject = 'Welcome to '.config('app.name');
         }
+
         return (new MailMessage)
             ->subject('Reset Password')
             ->line('Welcome Agenc')
             //->action('Reset Password', url($data->link))
-            ->line($data->meg);
+            ->line($data['message']);
     }
 
     /**

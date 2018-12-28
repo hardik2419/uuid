@@ -3,6 +3,7 @@
 {
   height: 195px;
   padding: 0;
+  background: $breadcamp;
   @include respond(md){
     height: auto;
     padding: 15px 0;

@@ -20,7 +20,7 @@ class TestLocation extends TestCase
 
     public function testLocationSuccessfully()
     {
-        $faker = $this->faker;
+        /* $faker = $this->faker;
         $data = array(
             'email' => $faker->unique()->safeEmail,
             'phone' => preg_replace("/[^a-zA-Z0-9]/", "", $faker->tollFreePhoneNumber),
@@ -31,7 +31,10 @@ class TestLocation extends TestCase
             'city' => $faker->city,
             'country' => $faker->streetAddress,
             'zip_code' => $faker->postcode,
-        );
+        ); */
+        $data = factory(Location::class)->make();
+        $data = json_decode(json_encode($data), true);
+
         $user = user::where('email', 'test@gmail.com')->first();
 
         return $this->json('POST', 'api/location', $data,$this->headers($user))

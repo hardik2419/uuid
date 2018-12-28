@@ -12,4 +12,24 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+   .sass('resources/sass/app.scss', 'public/css')
+
+
+mix.js('resources/admin/app.js', 'public/vendor/admin/js')
+   .js('resources/admin/js/admin.js', 'public/vendor/admin/js')
+   .sass('resources/admin/admin.scss', 'public/vendor/admin/css')
+   .copy('resources/admin/plugins', 'public/vendor/admin/plugins');
+
+
+/*mix.webpackConfig({
+    module: {
+        rules: [{
+            test: /\.js?$/,
+            exclude: /(bower_components)/,
+            use: [{
+                loader: 'babel-loader',
+                options: mix.config.babel()
+            }]
+        }]
+    }
+});*/

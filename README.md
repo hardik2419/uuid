@@ -86,4 +86,4 @@ $ npm run build
 In a different terminal, start the php/laravel server:
 
 $ composer install
-$ php artisan serve --port=9002
+$ php artisan serve 

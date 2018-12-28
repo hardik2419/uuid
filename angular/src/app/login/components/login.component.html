@@ -10,9 +10,9 @@
                         <mat-form-field class="input-text">
                             <mat-icon matPrefix><span class="la la-user"></span></mat-icon>
                             <input autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" formControlName="username"
-                                name="username" matInput placeholder="Username or e-mail address">
+                                name="username" matInput placeholder="Email address">
                             <mat-error *ngIf="submitted && f.username.errors">
-                                <span *ngIf="f.username.errors.required">Please enter Username or e-mail address !!!</span>
+                                <span *ngIf="f.username.errors.required">Please enter email address.</span>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -35,8 +35,10 @@
                 <div class="social_login">
                     <h6 class="mb-3">Login with Social Media</h6>
                     <ul>
-                        <li><a class="mr-2 linkedin" href=""><img src="{{ 'linkedin.png' | assetspath }}"></a></li>
-                        <li><a class="mr-2 google" href=""><img src="{{ 'google.png' | assetspath }}"></a></li>
+                        <li><a class="mr-2 linkedin" mat-flat-button href="#">
+                            <span class="icon-linkedin"></span>
+                        </a></li>
+                        <li><a class="mr-2 google" mat-flat-button href="#"><span class="icon-google"></span></a></li>
                     </ul>
                 </div>
             </div>

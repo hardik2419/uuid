@@ -11,7 +11,7 @@ return [
     | number of minutes that a conversation will remain stored in
     | the cache.
     |
-    */
+     */
     'conversation_cache_time' => 40,
 
     /*
@@ -23,6 +23,6 @@ return [
     | This value defines the number of minutes that this
     | data will remain stored in the cache.
     |
-    */
-    'user_cache_time' => 30,
+     */
+    'user_cache_time'         => 30,
 ];

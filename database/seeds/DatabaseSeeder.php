@@ -15,6 +15,11 @@ class DatabaseSeeder extends Seeder
         	[
 		        RolesTableSeeder::class,
 		        UsersTableSeeder::class,
+		        CompanyTableSeeder::class,
+		        LocationTableSeeder::class,
+		        CertificateTableSeeder::class,
+		        AccoladeTableSeeder::class,
+		        PortfolioTableSeeder::class,
 		    ]
        	);
     }

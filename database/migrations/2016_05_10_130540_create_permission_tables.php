@@ -33,6 +33,7 @@ class CreatePermissionTables extends Migration
            // $table->morphs('model');
             $table->string('model_id',36);
             $table->string('model_type');
+            $table->index(['model_id', 'model_type', ]);
 
             $table->foreign('permission_id')
                 ->references('id')
@@ -47,6 +48,7 @@ class CreatePermissionTables extends Migration
            // $table->morphs('model');
             $table->string('model_id',36);
             $table->string('model_type');
+            $table->index(['model_id', 'model_type', ]);
 
             $table->foreign('role_id')
                 ->references('id')

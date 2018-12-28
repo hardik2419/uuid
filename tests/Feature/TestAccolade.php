@@ -20,13 +20,16 @@ class TestAccolade extends TestCase
 
     public function testAccoladeSuccessfully()
     {
-        $faker = $this->faker;
+        $data = factory(Accolade::class)->make();
+        $data = json_decode(json_encode($data), true);
+
+        /* $faker = $this->faker;
         $data = array(
             'name' => $faker->name,
             'years' => $faker->year($max = 'now'),
             'image' => $faker->imageUrl($width = 640, $height = 480),
             'description' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        );
+        ); */
         $user = user::where('email', 'test@gmail.com')->first();
 
         return $this->json('POST', 'api/accolade', $data,$this->headers($user))

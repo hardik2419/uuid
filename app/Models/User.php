@@ -9,6 +9,7 @@ use Backpack\CRUD\CrudTrait;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Traits\Uuids;
+use App\Traits\FileUploadTrait;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -16,6 +17,7 @@ class User extends Authenticatable implements JWTSubject
     use CrudTrait;
     use HasRoles;
     use Uuids;
+    use FileUploadTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +39,18 @@ class User extends Authenticatable implements JWTSubject
         'password', 'remember_token',
     ];
 
+    public function getImageAttribute()
+    {
+        if (!empty($this->attributes['image'])) {
+            return $this->getFileUrl($this->attributes['image']);
+        }
+        return "";
+    }
+    public function setImageAttribute($value)
+    {
+        $this->saveFile($value, 'image', 'user');
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -46,7 +60,7 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
-    public function getCompanies()
+    public function company()
     {
         return $this->hasOne(Company::class, 'user_id', 'id');
     }

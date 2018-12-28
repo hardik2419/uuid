@@ -8,12 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 
+/**
+ * @resource Portfolio
+ */
 class PortfoliosController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Portfolios
      */
     public function index()
     {
@@ -21,18 +22,17 @@ class PortfoliosController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Portfolio
      */
     public function store(PortfoliosRequest $request)
     {
         try {
             $company_id = \Auth::user()->company->id;
+
             if (!$company_id) {
-                throw new \Exception('sorry! Company not found', 400);
+                throw new \Exception('Company not found', 404);
             }
+
             $insert_data = $request->only(['title', 'image', 'video', 'description']);
 
             $insert_data['company_id'] = $company_id;
@@ -40,7 +40,7 @@ class PortfoliosController extends Controller
 
             return (new PortfoliosResource($portfolio))->additional([
                 'status_code' => 200,
-                'message'     => 'Portfolio Added.',
+                'message'     => 'Portfolio successfully added',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -48,10 +48,7 @@ class PortfoliosController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Portfolio
      */
     public function show($id)
     {
@@ -59,11 +56,7 @@ class PortfoliosController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Portfolio
      */
     public function update(Request $request, $id)
     {
@@ -71,10 +64,7 @@ class PortfoliosController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Portfolio
      */
     public function destroy($id)
     {

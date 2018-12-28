@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use BotMan\BotMan\BotMan;
-use Illuminate\Http\Request;
 use App\Conversations\OnboardingConversation;
+use BotMan\BotMan\BotMan;
 
 class BotManController extends Controller
 {

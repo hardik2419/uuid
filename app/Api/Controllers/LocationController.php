@@ -6,17 +6,16 @@ use App\Api\Requests\LocationRequest;
 use App\Api\Resources\LocationResource;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use Illuminate\Http\Request;
 
 /**
- * @resource Auth
+ * @resource Location
  */
 class LocationController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Locations
      */
     public function index()
     {
@@ -24,17 +23,14 @@ class LocationController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Location
      */
     public function store(LocationRequest $request)
     {
         try {
             $company_id = \Auth::user()->company->id;
             if (!$company_id) {
-                throw new \Exception('sorry! company not found', 400);
+                throw new \Exception('Company not found', 400);
             }
 
             $insert_data = $request->only([
@@ -54,7 +50,7 @@ class LocationController extends Controller
 
             return (new LocationResource($location))->additional([
                 'status_code' => 200,
-                'message'     => 'Location Added.',
+                'message'     => 'Location successfully added',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -62,10 +58,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Location
      */
     public function show($id)
     {
@@ -73,11 +66,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Location
      */
     public function update(Request $request, $id)
     {
@@ -85,10 +74,7 @@ class LocationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Location
      */
     public function destroy($id)
     {

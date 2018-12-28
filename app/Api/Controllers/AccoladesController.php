@@ -2,18 +2,19 @@
 
 namespace App\Api\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\Accolade;
 use App\Api\Requests\AccoladesRequest;
 use App\Api\Resources\AccoladesResource;
+use App\Http\Controllers\Controller;
+use App\Models\Accolade;
+use Illuminate\Http\Request;
 
+/**
+ * @resource Accolade
+ */
 class AccoladesController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Accolades
      */
     public function index()
     {
@@ -21,26 +22,23 @@ class AccoladesController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Accolade
      */
     public function store(AccoladesRequest $request)
     {
         try {
             $company_id = \Auth::user()->company->id;
             if (!$company_id) {
-                throw new \Exception('sorry! Company not found', 400);
+                throw new \Exception('Company not found', 400);
             }
-            $insert_data = $request->only(['name','years','description','image']);
+            $insert_data = $request->only(['name', 'years', 'description', 'image']);
 
             $insert_data['company_id'] = $company_id;
-            $accolades = Accolade::create($insert_data);
+            $accolades                 = Accolade::create($insert_data);
 
             return (new AccoladesResource($accolades))->additional([
                 'status_code' => 200,
-                'message' => 'Accolades Added.',
+                'message'     => 'Accolades successfully added',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -48,10 +46,7 @@ class AccoladesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Accolade
      */
     public function show($id)
     {
@@ -59,11 +54,7 @@ class AccoladesController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Accolade
      */
     public function update(Request $request, $id)
     {
@@ -71,10 +62,7 @@ class AccoladesController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Accolade
      */
     public function destroy($id)
     {

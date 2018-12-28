@@ -19,8 +19,10 @@ class CreatePortfoliosTable extends Migration
             $table->string('title',50);
             $table->string('image')->nullable();
             $table->string('video')->nullable();
-            $table->longText('description',500)->nullable();
+            $table->text('description',500)->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

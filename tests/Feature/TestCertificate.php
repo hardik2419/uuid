@@ -20,13 +20,16 @@ class TestCertificate extends TestCase
 
     public function testCertificateSuccessfully()
     {
-        $faker = $this->faker;
+        /* $faker = $this->faker;
         $data = array(
             'name' => $faker->name,
             'years' => $faker->year($max = 'now'),
             'image' => $faker->imageUrl($width = 640, $height = 480),
             'description' => $faker->realText($maxNbChars = 200, $indexSize = 2),
-        );
+        ); */
+        $data = factory(Certificate::class)->make();
+        $data = json_decode(json_encode($data), true);
+
         $user = user::where('email', 'test@gmail.com')->first();
 
         return $this->json('POST', 'api/certificate', $data,$this->headers($user))

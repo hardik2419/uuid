@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\User;
+use App\Models\PasswordReset;
 class SetPassword extends TestCase
 {
     /**
@@ -16,10 +16,10 @@ class SetPassword extends TestCase
 
     public function testSetPassword()
     {
-        $user = User::where('email', 'test@gmail.com')->first();
+        $user = PasswordReset::where('email', 'test@gmail.com')->first();
         $data = [
             'email' => 'test@gmail.com',
-            'token' => $user->remember_token,
+            'token' => $user->token,
             'password' => 'test@123',
             'password_confirmation' => 'test@123',
         ];
@@ -28,7 +28,7 @@ class SetPassword extends TestCase
             ->assertStatus(200)
             ->assertJsonStructure([
                 'message',
-                'success'
+                'status_code'
             ]);
     }
 }

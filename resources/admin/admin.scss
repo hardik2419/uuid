@@ -1,0 +1,16 @@
+
+@import "./scss/admin";
+
+.login-page, .register-page{
+	background: #f4f6f9;
+	.login-box, .register-box{
+		margin: 0 auto;
+	}
+	.content-wrapper {
+	    min-height: calc(100vh - 52px);
+	    padding: 40px 0 !important;
+	}
+}
+// .hidden{
+// 	display: none;
+// }

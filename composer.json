@@ -27,7 +27,7 @@
         "laravel/socialite": "^3.2",
         "laravel/tinker": "^1.0",
         "moontoast/math": "^1.1",
-        "mpociot/laravel-apidoc-generator": "dev-master",
+        "mpociot/laravel-apidoc-generator": "2.1.8",
         "phpro/grumphp": "^0.14.2",
         "tymon/jwt-auth": "^1.0",
         "webpatser/laravel-uuid": "^3.0"

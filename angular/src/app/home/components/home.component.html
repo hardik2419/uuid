@@ -1,0 +1,107 @@
+<app-home-header></app-home-header>
+<div class="container-fluid homewapper">
+    <div class="row">
+        <app-sidebar></app-sidebar>
+        <div class="left-box col-6">
+            <div class="wapperdiv">
+                <div id="homeslider" class="carousel homesliderwapper slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#homeslider" data-slide-to="0" class="active"></li>
+                        <li data-target="#homeslider" data-slide-to="1"></li>
+                        <li data-target="#homeslider" data-slide-to="2"></li>
+                    </ul>
+                    <!-- The slideshow -->
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-slider-img"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                        <div class="carousel-item">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-slider-img"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                        <div class="carousel-item">
+                            <h3>Navigate business buying decisions with confidence</h3>
+                            <i class="icon-slider-img"></i>
+                            <p>
+                                <span>Verified Reviews</span>
+                                <samp>Read unbiased reviews conducted by Clutch analysts.</samp>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Left and right controls -->
+                    <!-- <a class="carousel-control-prev" href="#homeslider" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#homeslider" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </a> -->
+                </div>
+            </div>
+        </div>
+        <div class="right-box col-6">
+            <div class="wapperdiv">
+                <div class="chat-form">
+                    <div class="row chatboard">
+                        <div class="col-12" malihu-scrollbar [scrollbarOptions]="darkScrollbarOptions" *ngIf="chatlist.length > 0">
+                            <div class="chatbox" [ngClass]="chatdata?.userId ? 'right' : 'left'" *ngFor="let chatdata of chatlist">
+                                <div class="chat-head" *ngIf="!chatdata?.userId">
+                                    <img src="{{ 'layer-1.png' | assetspath}}" [ngClass]="!chatdata?.noimg ? 'avtar-hide' : ''" class="chat-avtar">
+                                    <h4 [innerHtml]="chatdata?.text"></h4>
+                                </div>
+                                <div class="chat-body" *ngIf="chatdata?.actions">
+                                        <button class="chatques" *ngFor="let button of chatdata?.actions" (click)="chatQues(button.value)">{{ button?.name }}</button>
+                                </div>
+                                <div class="chat-body" *ngIf="chatdata?.userId">
+                                    <div class="chatques" [ngClass]="chatdata?.userId ? 'chatans' : ''">
+                                        {{ chatdata?.message }}
+                                    </div>
+                                </div>
+                                <div class="chat-body" *ngIf="chatdata?.type == 'list'">
+                                    <ul class="chatques listwapper">
+                                        <li class="listing" *ngFor="let listdata of chatdata?.elements">
+                                            <a href="{{ listdata?.item_url }}">
+                                                <img src="{{ listdata?.image_url }}" class="list-img">
+                                                <p>
+                                                    <b>{{ listdata?.title }}</b>
+                                                    <samp>{{ listdata?.subtitle }}</samp>
+                                                </p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="spinner" *ngIf="chatloader">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                            <div class="bounce4"></div>
+                        </div>
+                    </div>
+                    <form class="formwapper row" [formGroup]="chatform" (ngSubmit)="onSubmit()" novalidate>
+                        <div class="col-12">
+                              <mat-form-field class="input-text">
+                                <input autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.message.errors }" formControlName="message" name="message" matInput placeholder="Chat with the Bot">
+                                <mat-error *ngIf="submitted && f.message.errors">
+                                    <span *ngIf="f.message.errors.required">Please enter your message here !!!</span>
+                                </mat-error>
+                            </mat-form-field>
+                            <button mat-button class="chatsubmit"><i class="la la-angle-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

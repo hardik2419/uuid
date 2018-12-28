@@ -2,22 +2,20 @@
 
 namespace App\Api\Controllers;
 
+use App\Api\Requests\ForgetPasswordRequest;
 use App\Api\Requests\LoginRequest;
 use App\Api\Requests\RegisterRequest;
-use App\Api\Requests\ForgetPasswordRequest;
 use App\Api\Requests\SetPasswordRequest;
 use App\Api\Requests\VerifyEmailRequest;
+use App\Api\Resources\UserResource;
 use App\Http\Controllers\Controller;
+use App\Models\PasswordReset;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use App\Notifications\UserRegister;
 use App\Notifications\ForgetPassowrdNotification;
 use App\Notifications\UserNotification;
-use App\Http\Resources\UserResource;
-use Config;
+use App\Notifications\UserRegister;
+use Illuminate\Http\Request;
+use JWTAuth;
 
 /**
  * @resource Auth
@@ -32,18 +30,21 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         try {
             if (!$token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                throw new \Exception("Invalid email or password", 401);
             }
 
-            $user = User::where('email', $credentials['email'])->where('is_verified', '!=', 0)->first();
-            if (!$user) {
-                throw new \Exception("Sorry Please verify your email address.", 400);
+            $user = \Auth::user();
+            if ($user->email_verified_at == '') {
+                throw new \Exception("Please verify your email address", 400);
             }
             return (new UserResource($user))->additional([
-                'token' => $token
+                'token' => $token,
             ]);
-        } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status_code' => $e->getCode(),
+                'message'     => $e->getMessage(),
+            ], $e->getCode());
         }
     }
 
@@ -53,23 +54,22 @@ class UserController extends Controller
     public function register(RegisterRequest $request)
     {
         $user = User::create([
-            'first_name'    => $request->get('first_name'),
-            'last_name'     => $request->get('last_name'),
-            'email'         => $request->get('email'),
-            'password'      => bcrypt($request->get('password')),
-            'phone'         => $request->get('phone'),
-            'remember_token'=> str_random(10),
+            'first_name' => $request->get('first_name'),
+            'last_name'  => $request->get('last_name'),
+            'email'      => $request->get('email'),
+            'password'   => bcrypt($request->get('password')),
+            'phone'      => $request->get('phone'),
+            'image'      => $request->get('image'),
         ]);
         if (!$user) {
-            throw new \Exception("Sorry, please try again later.", 400);
+            throw new \Exception("Please try again later.", 400);
         } else {
             $user->roles()->sync(['3']);
-            $user['link'] = Config::get('app.url') . '/verify/'.$user->email.'/'.$user->remember_token;
+            $user['link'] = url('/verify/' . $user->email);
             $user->notify(new UserRegister($user));
-
             return (new UserResource($user))->additional([
-                'success' => true,
-                'message' => 'Register Successfully.Please check your to verify email address.',
+                'status_code' => 200,
+                'message'     => 'You have registered Successfully, Please check your to verify email address.',
             ]);
         }
     }
@@ -80,40 +80,47 @@ class UserController extends Controller
     {
         $user = User::where('email', $request->get('email'))->first();
         if (!$user) {
-            throw new \Exception("Sorry, please try again later.", 400);
+            return response()->json([
+                'code'    => 400,
+                'message' => 'Please try again later.',
+            ]);
         } else {
-            $user->update(['remember_token' => str_random(10)]);
+            $token = str_random(10);
+            PasswordReset::create([
+                'email' => $request->get('email'),
+                'token' => $token,
+            ]);
 
-            $user['link'] = Config::get('app.url') . '/set-password/'.$user->email.'/'.$user->remember_token;
+            $user['link'] = url('/set-password/' . $user->email . '/' . $token);
             $user->notify(new ForgetPassowrdNotification($user));
 
             return response()->json([
-                'code' => '200',
-                'success' => true,
-                'message' => 'Please check your email address to reset password.',
+                'status_code' => 200,
+                'message'=> 'Reset password mail has been sent, Please check your email address to reset password.',
             ]);
         }
     }
     /**
-     * verify user using email
+     * Verify email
      */
     public function verifyEmail(VerifyEmailRequest $request)
     {
         $user = User::where([
-                'email' => $request->get('email'),
-                'remember_token' => $request->get('token'),
-                'is_verified' => 0
+            'email'             => $request->get('email'),
+            'email_verified_at' => null,
         ])->first();
 
         if (!$user) {
-            throw new \Exception("Sorry, please try again later.", 400);
+            return response()->json([
+                'code'    => 400,
+                'message' => 'Email was already verified',
+            ]);
         } else {
-            $user->update(['remember_token' => '', 'is_verified' => 1]);
+            $user->update(['email_verified_at' => date('Y-m-d H:i:s')]);
 
             return response()->json([
-                'code' => '200',
-                'success' => true,
-                'message' => 'Your email id successfully verifies.',
+                'code'    => 200,
+                'message' => 'Your email has been verified successfully',
             ]);
         }
     }
@@ -123,25 +130,39 @@ class UserController extends Controller
      */
     public function setPassword(SetPasswordRequest $request)
     {
-        $user = User::where(['email' => $request->get('email'), 'remember_token' => $request->get('token')])->first();
+        $rest = PasswordReset::where([
+            'email' => $request->get('email'), 'token' => $request->get('token'),
+        ])->first();
+
+        if (!$rest) {
+            throw new \Exception("Sorry, please try again later.", 400);
+        }
+
+        $user = User::where(['email' => $request->get('email')])->first();
+
         if (!$user) {
             throw new \Exception("Sorry, please try again later.", 400);
         } else {
-            $user->update(['remember_token' => '', 'password' => bcrypt($request->get('password'))]);
-            $user['subject'] = 'Reset Password';
-            $user['meg'] = 'Your password successfully updated.';
-            $user->notify(new UserNotification($user));
+            $user->update(['password' => bcrypt($request->get('password'))]);
+            PasswordReset::where('email', $request->get('email'))->delete();
+
+            $data['subject'] = 'Reset Password';
+            $data['message'] = 'Your password successfully updated.';
+
+            $user->notify(new UserNotification($data));
             return response()->json([
-                'code' => '200',
-                'success' => true,
-                'message' => 'Your password successfully updated.',
+                'status_code' => 200,
+                'message'     => 'Your password has been successfully updated',
             ]);
         }
     }
 
+    /**
+     * Get Authenticated User
+     */
     public function getAuthenticatedUser(Request $request)
     {
+        $user = JWTAuth::parseToken()->authenticate();
         return new UserResource($user);
-        //return response()->json(compact('user'));
     }
 }

@@ -26,17 +26,20 @@ $fontPath : "/assets";
   color: #000;
 }
 
-.icon-rightarrow:before {
+.icon-linkedin:before {
   content: "\e902";
 }
-.icon-sliderimg:before {
-  content: "\e901";
-  color: #fff;
-}
-.icon-menuicon:before {
-  content: "\e900";
-  color: #fff;
+.icon-google:before {
+  content: "\e904";
 }
 .icon-closed:before {
   content: "\e903";
+}
+.icon-slider-img:before {
+  content: "\e901";
+  color: #fff;
+}
+.icon-menu-icon:before {
+  content: "\e900";
+  color: #fff;
 }

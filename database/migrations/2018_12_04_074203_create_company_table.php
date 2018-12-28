@@ -24,7 +24,9 @@ class CreateCompanyTable extends Migration
             $table->date('founded_date')->nullable();
             $table->string('employe_size',20)->nullable();
             $table->string('admin_email',50)->nullable();
-            $table->longText('description')->nullable();
+            $table->text('description',1000)->nullable();
+            $table->string('website_url',100)->nullable();
+            $table->string('profile_complication',5)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,11 +16,13 @@ class CreateAccoladesTable extends Migration
         Schema::create('accolades', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id');
-            $table->string('name');
-            $table->string('years')->nullable();
+            $table->string('name',80);
+            $table->string('years',4)->nullable();
             $table->string('image')->nullable();
-            $table->longText('description',250)->nullable();
+            $table->text('description',500)->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

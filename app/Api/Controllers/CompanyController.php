@@ -3,20 +3,19 @@
 namespace App\Api\Controllers;
 
 use App\Api\Requests\CompanyRequest;
-use App\Http\Controllers\Controller;
 use App\Api\Resources\CompanyResource;
+use App\Http\Controllers\Controller;
 use App\Models\Company;
+use Illuminate\Http\Request;
 
 /**
- * @resource Auth
+ * @resource Company
  */
 class CompanyController extends Controller
 {
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Get Companies
      */
     public function index()
     {
@@ -24,23 +23,20 @@ class CompanyController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Add Company
      */
     public function store(CompanyRequest $request)
     {
         try {
-            $insert_data = $request->only(['name','logo','email','phone','tagline','founded_date',
-            'employe_size','admin_email','description','website_url']);
+            $insert_data = $request->only(['name', 'logo', 'email', 'phone', 'tag_line', 'founded_date',
+                'employe_size', 'admin_email', 'description', 'website_url']);
 
             $insert_data['user_id'] = \Auth::user()->id;
-            $company = Company::create($insert_data);
+            $company                = Company::create($insert_data);
 
             return (new CompanyResource($company))->additional([
                 'status_code' => 200,
-                'message' => 'Comapny Added.',
+                'message'     => 'Company successfully added',
             ]);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage(), $e->getCode());
@@ -48,10 +44,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Get Company
      */
     public function show($id)
     {
@@ -59,11 +52,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update Company
      */
     public function update(Request $request, $id)
     {
@@ -71,10 +60,7 @@ class CompanyController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Company
      */
     public function destroy($id)
     {
