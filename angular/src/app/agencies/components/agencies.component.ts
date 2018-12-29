@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
     selector: 'app-agencies',
     templateUrl: './agencies.component.html',
@@ -12,26 +11,32 @@ export class AgenciesComponent implements OnInit {
         pagetitle : 'User Account',
         link: 'user-account'
     };
-    submitted:boolean = false;
-    agenciesform: FormGroup;
+    agencs:any = [];
     constructor(
         private router: Router,
         private http: HttpClient,
-        private formBuilder: FormBuilder,
 
         ) {
+        this.agencs = [
+            {
+                title:'Deksia',
+                image:'company_logo2.jpg',
+            },
+            {
+                title:'Brand Tuitive',
+                image:'company_logo1.jpg',
+            },
+            {
+                title:'Spire Agency',
+                image:'company_logo4.jpg',
+            },
+            {
+                title:'Pure Fusion Media',
+                image:'company_logo3.jpg',
+            },
+        ]
     }
     ngOnInit() {
-        this.agenciesform = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
-        });
-    }
-    get f() {
-        return this.agenciesform.controls;
-    }
-
-    onSubmit() {
 
     }
 }

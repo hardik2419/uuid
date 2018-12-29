@@ -20,7 +20,7 @@
 }
 .headerwapper {
     position: fixed;
-    z-index: 1;
+    z-index: 9;
     background:$primary;
     color: $white;
     height: 100px;
@@ -85,6 +85,5 @@
   @include respond(lg){
     height: 80px;
     background: $black_russian;
-    position: relative;
   }
 }

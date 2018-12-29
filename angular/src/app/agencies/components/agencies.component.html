@@ -26,9 +26,9 @@
 <div class="agenc-fillter-wapper">
     <div class="container fillters">
         <div class="row pt-3 pb-3">
-            <div class="col-xl-6 col-md-12 col-sm-12">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 fillter-top">
                 <div class="row">
-                    <div class="col-xl-4 col-md-4 col-sm-12">
+                    <div class="col-xl-4 col-md-4 col-md-4 col-sm-12">
                         <span class="firms">10624 Firms</span>
                     </div>
                     <div class="col-xl-4 col-md-4 col-sm-12 review-fillter">
@@ -39,9 +39,9 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-12 col-sm-12">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 fillter-bottom">
                 <div class="row">
-                    <div class="col-xl-6 pull-right col-md-6 col-sm-12 sort-by">
+                    <div class="col-xl-6 pull-right col-md-6 col-sm-6 col-xs-12 sort-by">
                         <label class="pull-left mr-2">Sort by:</label>
                         <mat-form-field class="pull-left">
                             <mat-select placeholder="Select any one">
@@ -51,7 +51,7 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div class="col-xl-5 pull-right col-md-6 col-sm-12 results">
+                    <div class="col-xl-5 pull-right col-md-6 col-sm-6 col-xs-12 results">
                         <span>Filter Results <i class="la la-plus"></i></span>
                     </div>
                 </div>
@@ -63,36 +63,240 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <div class="listing-wapper pt-3 pb-3">
-                    <div class="listing-img ">
+                <div class="listing-wapper row mb-4" *ngFor="let list of agencs">
+                    <div class="listing-img col-xl-2 col-lg-2 col-md-3 col-sm-12 pr-4 pt-4 pb-4">
                         <div class="company-logo">
-
+                            <img class="mr-2" src="{{ list?.image | assetspath }}">
                         </div>
-                        <div class="company-review">
-
+                        <div class="company-review mt-3">
+                            <app-rating-star [percentage]="'100'"></app-rating-star>
+                            <span class="total-review"><b>4.7</b> <samp>-</samp> <a href="#">178 Reviews<i class="la la-angle-right"></i></a></span>
                         </div>
                     </div>
-                    <div class="listing-content">
-                        <h3 class="pb-2">Deksia</h3>
+                    <div class="listing-content col-xl-10 col-lg-10 col-md-9 col-sm-12 pl-4 pt-4 pb-4">
+                        <h3 class="pb-2">
+                            <a href="#">{{list?.title}}</a>
+                            <span class="sponsor">sponsor</span>
+                        </h3>
                         <span class="tagline pb-3">Business Intelligence &amp; Strategic Creative</span>
                         <p>
                             &quot;BrandTuitive has an exceptional first-class team. They&apos;re a joy to be
                             around and they work their tails off.&quot;
                         </p>
                         <p class="check-list">Trade Marketer, Large CPG Corporation<i class="la la-check-square pl-2"></i></p>
-                        <ul class="project-info">
+                        <ul class="project-info pb-3">
                             <li><i class="la la-tag pr-2"></i>$25,000+</li>
                             <li><i class="la la-clock-o pr-2"></i>$100 - $149 / hr</li>
                             <li><i class="la la-user pr-2"></i>50 - 249</li>
                             <li><i class="la la-map-marker pr-2"></i>Louisville, KY</li>
                         </ul>
-                        <div class="service-focus">
-                            <div class="col-sm-3 col-md-2">
-                                <app-progress-bar [fontSize]="'24'" [percentage] = "'20'" [Wdith]="'100'" [borderColor]="'#f0cd64'" ></app-progress-bar>
+                        <div class="service-focus row mb-4">
+                            <h6 class="mb-3 col-12">Service Focus</h6>
+                            <div class="progress-bar-wapper row m-0">
+                                <app-progress-bar class="col-xl-2 col-lg-2  col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'Advertising'" [percentage]= "'50'" [Wdith]="'100'" [borderColor]="'#4385f4'" ></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2  col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'Branding'" [percentage]= "'40'" [Wdith]="'100'" [borderColor]="'#4ed7df'" ></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'SEO'" [percentage]= "'30'" [Wdith]="'100'" [borderColor]="'#f0cd64'" ></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'Content Marketing'" [percentage]= "'20'" [Wdith]="'100'" [borderColor]="'#f0cd64'" ></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'Social Media Marketing'" [percentage]= "'15'" [Wdith]="'100'" [borderColor]="'#7e69ff'" ></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xm-12" [fontSize]="'24'" [label]="'Web Design'" [percentage]= "'15'" [Wdith]="'100'" [borderColor]="'#ff9989'" ></app-progress-bar>
+                            </div>
+                        </div>
+                        <div class="company-details row">
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xm-12">
+                                <a href="#"><i class="la la-globe pr-2"></i>View Website</a>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xm-12">
+                                <a href="#"><i class="la la-user pr-2"></i>View Profile</a>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xm-12">
+                                <a href="mailto:loremipsum@gmail.com"><i class="la la-envelope pr-2"></i>loremipsum@gmail.com</a>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-xm-12">
+                                <a href="tel:1234567890"><i class="la la-phone pr-2"></i>123.456.7890</a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- <div class="listing-wapper row mb-4">
+                    <div class="listing-img col-xl-2 col-lg-2 col-md-12 col-sm-12 pr-4 pt-4 pb-4">
+                        <div class="company-logo">
+                            <img class="mr-2" src="{{'company_logo1.jpg' | assetspath }}">
+                        </div>
+                        <div class="company-review mt-3">
+                            <app-rating-star [percentage]="'82'"></app-rating-star>
+                            <span class="total-review"><b>4.7</b> - <a href="#">178 Reviews<i class="la la-angle-right"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="listing-content col-xl-10 col-lg-10 col-md-12 col-sm-12 pl-4 pt-4 pb-4">
+                        <h3 class="pb-2">
+                            <a href="#">Brand Tuitive</a>
+                            <span class="sponsor">sponsor</span>
+                        </h3>
+                        <span class="tagline pb-3">Business Intelligence &amp; Strategic Creative</span>
+                        <p>
+                            &quot;BrandTuitive has an exceptional first-class team. They&apos;re a joy to be
+                            around and they work their tails off.&quot;
+                        </p>
+                        <p class="check-list">Trade Marketer, Large CPG Corporation<i class="la la-check-square pl-2"></i></p>
+                        <ul class="project-info pb-3">
+                            <li><i class="la la-tag pr-2"></i>$25,000+</li>
+                            <li><i class="la la-clock-o pr-2"></i>$100 - $149 / hr</li>
+                            <li><i class="la la-user pr-2"></i>50 - 249</li>
+                            <li><i class="la la-map-marker pr-2"></i>Louisville, KY</li>
+                        </ul>
+                        <div class="service-focus row mb-4">
+                            <h6 class="mb-3 col-12">Service Focus</h6>
+                            <div class="progress-bar-wapper row m-0">
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'Advertising'" [percentage]="'50'"
+                                    [Wdith]="'100'" [borderColor]="'#4385f4'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'Branding'" [percentage]="'40'"
+                                    [Wdith]="'100'" [borderColor]="'#4ed7df'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'SEO'" [percentage]="'30'"
+                                    [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'Content Marketing'"
+                                    [percentage]="'20'" [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'Social Media Marketing'"
+                                    [percentage]="'15'" [Wdith]="'100'" [borderColor]="'#7e69ff'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-lg-2 col-sm-12" [fontSize]="'24'" [label]="'Web Design'" [percentage]="'15'"
+                                    [Wdith]="'100'" [borderColor]="'#ff9989'"></app-progress-bar>
+                            </div>
+                        </div>
+                        <div class="company-details row">
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-globe pr-2"></i>View Website</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-user pr-2"></i>View Profile</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="mailto:loremipsum@gmail.com"><i class="la la-envelope pr-2"></i>loremipsum@gmail.com</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="tel:1234567890"><i class="la la-phone pr-2"></i>123.456.7890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listing-wapper row  mb-4">
+                    <div class="listing-img col-xl-2 col-lg-2 col-md-12 col-sm-12 pr-4 pt-4 pb-4">
+                        <div class="company-logo">
+                            <img class="mr-2" src="{{'company_logo4.jpg' | assetspath }}">
+                        </div>
+                        <div class="company-review mt-3">
+                            <app-rating-star [percentage]="'0'"></app-rating-star>
+                            <span class="total-review"><b>4.7</b> - <a href="#">178 Reviews<i class="la la-angle-right"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="listing-content col-xl-10 col-lg-10 col-md-12 col-sm-12 pl-4 pt-4 pb-4">
+                        <h3 class="pb-2">
+                            <a href="#">Spire Agency</a>
+                            <span class="sponsor">sponsor</span>
+                        </h3>
+                        <span class="tagline pb-3">Business Intelligence &amp; Strategic Creative</span>
+                        <p>
+                            &quot;BrandTuitive has an exceptional first-class team. They&apos;re a joy to be
+                            around and they work their tails off.&quot;
+                        </p>
+                        <p class="check-list">Trade Marketer, Large CPG Corporation<i class="la la-check-square pl-2"></i></p>
+                        <ul class="project-info pb-3">
+                            <li><i class="la la-tag pr-2"></i>$25,000+</li>
+                            <li><i class="la la-clock-o pr-2"></i>$100 - $149 / hr</li>
+                            <li><i class="la la-user pr-2"></i>50 - 249</li>
+                            <li><i class="la la-map-marker pr-2"></i>Louisville, KY</li>
+                        </ul>
+                        <div class="service-focus row mb-4">
+                            <h6 class="mb-3 col-12">Service Focus</h6>
+                            <div class="progress-bar-wapper row m-0">
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Advertising'" [percentage]="'50'"
+                                    [Wdith]="'100'" [borderColor]="'#4385f4'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Branding'" [percentage]="'40'"
+                                    [Wdith]="'100'" [borderColor]="'#4ed7df'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'SEO'" [percentage]="'30'"
+                                    [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Content Marketing'"
+                                    [percentage]="'20'" [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Social Media Marketing'"
+                                    [percentage]="'15'" [Wdith]="'100'" [borderColor]="'#7e69ff'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Web Design'" [percentage]="'15'"
+                                    [Wdith]="'100'" [borderColor]="'#ff9989'"></app-progress-bar>
+                            </div>
+                        </div>
+                        <div class="company-details row">
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-globe pr-2"></i>View Website</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-user pr-2"></i>View Profile</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="mailto:loremipsum@gmail.com"><i class="la la-envelope pr-2"></i>loremipsum@gmail.com</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="tel:1234567890"><i class="la la-phone pr-2"></i>123.456.7890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="listing-wapper row mb-4">
+                    <div class="listing-img col-xl-2 col-md-12 col-sm-12 pr-4 pt-4 pb-4">
+                        <div class="company-logo">
+                            <img class="mr-2" src="{{'company_logo3.jpg' | assetspath }}">
+                        </div>
+                        <div class="company-review mt-3">
+                            <app-rating-star [percentage]="'50'"></app-rating-star>
+                            <span class="total-review"><b>4.7</b> - <a href="#">178 Reviews<i class="la la-angle-right"></i></a></span>
+                        </div>
+                    </div>
+                    <div class="listing-content col-xl-10 col-md-12 col-sm-12 pl-4 pt-4 pb-4">
+                        <h3 class="pb-2">
+                            <a href="#">Pure Fusion Media</a>
+                            <span class="sponsor">sponsor</span>
+                        </h3>
+                        <span class="tagline pb-3">Business Intelligence &amp; Strategic Creative</span>
+                        <p>
+                            &quot;BrandTuitive has an exceptional first-class team. They&apos;re a joy to be
+                            around and they work their tails off.&quot;
+                        </p>
+                        <p class="check-list">Trade Marketer, Large CPG Corporation<i class="la la-check-square pl-2"></i></p>
+                        <ul class="project-info pb-3">
+                            <li><i class="la la-tag pr-2"></i>$25,000+</li>
+                            <li><i class="la la-clock-o pr-2"></i>$100 - $149 / hr</li>
+                            <li><i class="la la-user pr-2"></i>50 - 249</li>
+                            <li><i class="la la-map-marker pr-2"></i>Louisville, KY</li>
+                        </ul>
+                        <div class="service-focus row mb-4">
+                            <h6 class="mb-3 col-12">Service Focus</h6>
+                            <div class="progress-bar-wapper row m-0">
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Advertising'" [percentage]="'50'"
+                                    [Wdith]="'100'" [borderColor]="'#4385f4'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Branding'" [percentage]="'40'"
+                                    [Wdith]="'100'" [borderColor]="'#4ed7df'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'SEO'" [percentage]="'30'"
+                                    [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Content Marketing'"
+                                    [percentage]="'20'" [Wdith]="'100'" [borderColor]="'#f0cd64'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Social Media Marketing'"
+                                    [percentage]="'15'" [Wdith]="'100'" [borderColor]="'#7e69ff'"></app-progress-bar>
+                                <app-progress-bar class="col-xl-2 col-sm-12" [fontSize]="'24'" [label]="'Web Design'" [percentage]="'15'"
+                                    [Wdith]="'100'" [borderColor]="'#ff9989'"></app-progress-bar>
+                            </div>
+                        </div>
+                        <div class="company-details row">
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-globe pr-2"></i>View Website</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="#"><i class="la la-user pr-2"></i>View Profile</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="mailto:loremipsum@gmail.com"><i class="la la-envelope pr-2"></i>loremipsum@gmail.com</a>
+                            </div>
+                            <div class="col-xl-3 col-md-6 col-sm-12">
+                                <a href="tel:1234567890"><i class="la la-phone pr-2"></i>123.456.7890</a>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -1,3 +1,8 @@
+@import 'varibales';
 section.main-container {
     padding-top: 100px;
+    padding-bottom: 40px;
+    @include respond(lg){
+        padding-top: 80px;
+    }
 }

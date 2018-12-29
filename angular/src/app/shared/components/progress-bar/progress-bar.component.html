@@ -1,14 +1,16 @@
-<div class="progress" [ngStyle]="{'width': Wdith ? Wdith+'px' : '','height': Wdith ? Wdith+'px' : '','line-height': Wdith+'px' ? Wdith : ''}" *ngIf="percentage" [attr.data-percentage]="percentage">
-	<span class="progress-left">
-		<span class="progress-bar"></span>
-	</span>
-	<span class="progress-right">
-		<span class="progress-bar" [ngStyle]="{'border-color': borderColor ? borderColor : ''}"></span>
-	</span>
-	<div class="progress-value" [ngStyle]="{'font-size': fontSize ? fontSize+'px' : ''}">
-		<div>
-			{{percentage}}%<br>
-			<span>completed</span>
+<div class="progress-box" data-toggle="tooltip" title="{{label}}" *ngIf="percentage">
+	<div class="progress" [ngStyle]="{'width': Wdith ? Wdith+'px' : '','height': Wdith ? Wdith+'px' : '','line-height': Wdith+'px' ? Wdith : ''}" *ngIf="percentage" [attr.data-percentage]="percentage">
+		<span class="progress-left">
+			<span class="progress-bar"></span>
+		</span>
+		<span class="progress-right">
+			<span class="progress-bar" [ngStyle]="{'border-color': borderColor ? borderColor : ''}"></span>
+		</span>
+		<div class="progress-value" [ngStyle]="{'font-size': fontSize ? fontSize+'px' : ''}">
+			<div>
+				{{percentage}}%
+			</div>
 		</div>
 	</div>
+	<span class="progress-label pt-2" *ngIf="label">{{label}}</span>
 </div>

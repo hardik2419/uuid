@@ -1,0 +1,23 @@
+@import 'varibales';
+.star-ratings-sprite {
+  width: 80px;
+  margin: 0 auto;
+  height: 20px;
+  position: relative;
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    width: 100%;
+    &:before{
+      content: '\f318\f318\f318\f318\f318';
+      color: $ratingstar;
+      font-size: 16px;
+    }
+    &.star-ratings:before {
+        color: $ratingstar-active;
+    }
+  }
+}

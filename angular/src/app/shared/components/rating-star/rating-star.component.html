@@ -1,0 +1,9 @@
+<!-- <div class="star-ratings-css">
+	<div class="star-ratings-css-top" style="width: 84%">
+		<span class="la star"></span>
+	</div>
+</div> -->
+<div class="star-ratings-sprite" *ngIf="percentage">
+	<span class="empty la"></span>
+	<span [ngStyle]="{'width': percentage ? percentage+'%' : ''}" class="star-ratings la"></span>
+</div>

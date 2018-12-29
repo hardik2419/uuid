@@ -18,7 +18,11 @@ a{
     color: $accent;
     &:hover{
         color: $accent;
+        .la{
+            text-decoration: none;
+        }
     }
+
 }
 button:focus{
     outline: none;
