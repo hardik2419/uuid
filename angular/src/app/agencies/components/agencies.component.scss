@@ -131,7 +131,7 @@
         height: auto;
     }
     .fillters{
-        line-height: 60px;
+        line-height: 55px;
         @include respond(lg){
             .fillter-top{
                 display: none;
@@ -282,7 +282,7 @@
                 border: 0;
             }
             @include respond(sm){
-                padding: 0px 10px 20px !important;
+                padding: 0px 15px 20px !important;
             }
             h3,h6{
                 color: $primary;
@@ -345,6 +345,23 @@
                     }
                 }
             }
+        }
+    }
+    /deep/
+    {
+        .mat-paginator-page-size{
+            display: none;
+        }
+        button.mat-icon-button {
+            border: 1px solid $gainsboro;
+            border-radius: 0;
+            margin-right: 5px;
+            &.mat-paginator-navigation-next{
+                margin-right: 0;
+            }
+        }
+        .mat-paginator-range-label{
+            color: $primary;
         }
     }
 }

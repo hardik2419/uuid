@@ -4,7 +4,7 @@ import { HttpModule } from '@angular/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { MatInputModule, MatSelectModule, MatCheckboxModule ,MatButtonModule, MatIconModule } from '@angular/material';
+import { MatInputModule, MatSelectModule, MatCheckboxModule ,MatButtonModule, MatIconModule,MatPaginatorModule } from '@angular/material';
 import { Conopnents } from "./components";
 import { MalihuScrollbarModule } from 'ngx-malihu-scrollbar';
 /*
@@ -28,6 +28,7 @@ const Modules = [
     MatIconModule,
     MatSelectModule,
     MatCheckboxModule,
+    MatPaginatorModule,
     MalihuScrollbarModule,
     MatButtonModule,
 ]

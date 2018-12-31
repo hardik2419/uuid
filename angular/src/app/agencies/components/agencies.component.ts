@@ -1,42 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { PageEvent } from '@angular/material';
+import { AgenciesService } from '../../shared/services/agencies.service';
+
 @Component({
     selector: 'app-agencies',
     templateUrl: './agencies.component.html',
     styleUrls: ['./agencies.component.scss'],
 })
 export class AgenciesComponent implements OnInit {
-    breadcrumbs = {
-        pagetitle : 'User Account',
-        link: 'user-account'
-    };
     agencs:any = [];
+    selected: any = 'sponsored';
+    loader:boolean = false;
+    // MatPaginator Inputs
+    pageSize = 2;
+    length = 10;
+    currentPage = 0;
+    // MatPaginator Output
+    pageEvent: PageEvent;
     constructor(
         private router: Router,
         private http: HttpClient,
+        private agenciesService: AgenciesService,
 
         ) {
-        this.agencs = [
-            {
-                title:'Deksia',
-                image:'company_logo2.jpg',
-            },
-            {
-                title:'Brand Tuitive',
-                image:'company_logo1.jpg',
-            },
-            {
-                title:'Spire Agency',
-                image:'company_logo4.jpg',
-            },
-            {
-                title:'Pure Fusion Media',
-                image:'company_logo3.jpg',
-            },
-        ]
     }
     ngOnInit() {
+        this.getAgencsData(null);
+    }
+    getAgencsData(event?: PageEvent){
+        this.loader = true;
+        this.agenciesService.getAgencies('',
+            res => {
+                let response = res.json();
+                this.agencs = response.data;
+                this.pageSize = response.pageSize;
+                this.length = response.length;
+                this.loader = false;
+            },
+            error => {
 
+            }
+        );
     }
 }

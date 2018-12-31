@@ -5,6 +5,7 @@ import { FooterComponent } from "./footer/footer.component";
 import { BreadcrumbComponent } from "./breadcrumb/breadcrumb.component";
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 import { RatingStarComponent } from './rating-star/rating-star.component';
+import { LoaderComponent } from './loader/loader.component';
 
 //export { LogoComponent, SideBarComponent } from "./components";
 
@@ -15,5 +16,6 @@ export const Conopnents = [
     ProgressBarComponent,
     RatingStarComponent,
     FooterComponent,
-    SideBarComponent
+    SideBarComponent,
+    LoaderComponent
 ];

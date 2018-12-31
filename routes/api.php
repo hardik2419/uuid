@@ -21,6 +21,8 @@ Route::get('verify', 'UserController@verifyEmail');
 Route::post('forget-password', 'UserController@forgetPassword');
 Route::post('set-password', 'UserController@setPassword');
 
+Route::get('agencies', 'CompanyController@agenciesList');
+
 Route::group(['middleware' => ['jwt.verify']], function () {
     Route::get('user', 'UserController@getAuthenticatedUser');
 
